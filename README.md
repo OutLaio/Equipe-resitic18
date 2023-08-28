@@ -7,5 +7,5 @@ Integrantes da equipe
 ```
 
 1. Laio Rodrigues
-2.
+2. Vitor Sousa
 3.
