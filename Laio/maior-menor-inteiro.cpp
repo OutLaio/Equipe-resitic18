@@ -3,14 +3,15 @@
 using namespace std;
 
 int main(){
-    
-    unsigned long int uli = 0xFFFFFFFFFFFFFFFF;
+    long int li = 0xFFFFFFFFFFFFFFFF; 
+    // Devido a li ser do tipo signed, este número corresponde a o maior número negativo que no caso é -1.
 
-    cout << "O maior valor de um unsigned long int eh: " << uli << endl;
+    unsigned long int uli = li;
+    // Para o tipo unsigned, corresponde ao maior número que pode ser escrito.
 
-    uli++;
+    cout << "O valor de li eh: " << li << endl;
 
-    cout << "O menor valor de um unsigned long int eh: " << uli << endl;
+    cout << "O valor de uli eh: " << uli << endl;
 
     return 0;
 }
