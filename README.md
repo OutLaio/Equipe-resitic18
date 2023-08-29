@@ -8,4 +8,5 @@ Integrantes da equipe
 
 1. Laio Rodrigues
 2. Vitor Sousa
-3.
+3. Brendom Gonçalves
+
