@@ -1,0 +1,1 @@
+Brendom: Minha motivação em participar da residência sempre foi em questão de colocar em prova todo meu conhecimento adquirido desde o ensino médio. Elaborar projetos por completo utilizando tecnologias dos mercados, projeto em equipe, entre outros. As expectativas giram em torno da promessa da residência sobre ser inteiramente prática.
