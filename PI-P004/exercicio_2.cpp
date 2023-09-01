@@ -4,10 +4,7 @@
 using namespace std;
 
 int main(){
-    char a;
-
-    cout << "Digite um caractere: ";
-    cin >> a;
+    wchar_t a = 'ã';
     
     cout << "'" << a << "' - " << dec << (int)a << " (dec) - " << oct << (int)a << " (oct) - 0x" << hex << (int)a << " (hex) " << endl;
 
