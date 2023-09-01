@@ -3,11 +3,14 @@
 using namespace std;
 
 int main(){
-    int maior = 0x7FFFFFFF;
-    int menor = 0x80000000;
 
-    cout << "O maior valor de inteiro: " << maior << endl;
-    cout << "O menor valor de inteiro: " << menor << endl;
+    unsigned long int uli = 0xFFFFFFFFFFFFFFFF;
+
+    cout << "O maior valor de um unsigned long int eh: " << uli << endl;
+
+    uli++;
+
+    cout << "O menor valor de um unsigned long int eh: " << uli << endl;
 
     return 0;
 }
