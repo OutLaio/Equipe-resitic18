@@ -10,9 +10,9 @@ int main(){
     cout << "Digite outro numero: ";
     cin >> b;
 
-    c = a+b;
+    c = a*b;
 
-    cout << "A soma dos dois numeros em hexadecimal eh : 0x" << hex << c <<endl;
+    cout << "O produto dos dois numeros em octal eh : " << oct << c <<endl;
 
     return 0;
 }
