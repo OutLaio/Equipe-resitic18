@@ -10,9 +10,9 @@ int main(){
     cout << "Digite outro numero: ";
     cin >> b;
 
-    c = a*b;
+    c = (a>b) ? a-b : b-a;
 
-    cout << "O produto dos dois numeros em octal eh : " << oct << c <<endl;
+    cout << "A diferenca absoluta entre os dois numeros eh : " << c <<endl;
 
     return 0;
 }
