@@ -11,9 +11,9 @@ int main(){
     cout << "Digite outro numero: ";
     cin >> y;
 
-    z = x+y;
+    z = (x+y)/2;
 
-    cout << endl << "A soma de x e y eh: " << z << endl;
+    cout << endl << "A media de x e y eh: " << z << endl;
 
     return 0;
 }
