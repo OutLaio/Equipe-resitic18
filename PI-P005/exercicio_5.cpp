@@ -5,7 +5,6 @@
 using namespace std;
 
 int main(){
-
     unsigned char gene;
     
     cout << "Digite o caractere correspondente ao gene: ";
