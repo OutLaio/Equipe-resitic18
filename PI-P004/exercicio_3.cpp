@@ -3,11 +3,17 @@
 using namespace std;
 
 int main(){
-    long int li = 0x80000000;
+    unsigned int ui = 0x7FFFFFFF; 
+    // Devido a ui ser do tipo unsigned, este número corresponde a algum valor positivo correspondente.
 
-    cout << "O maior valor de li eh: " << li-1 << endl;
+    long int li = ui;
+    // Para o tipo signed, corresponde ao maior número que pode ser escrito.
 
-    cout << "O menor valor de li eh: " << li << endl;
+    //Obs.: Em ambos os casos, o valor impresso será o mesmo, pois ui abrange todos os números positivos que pode ser escrito em li
+
+    cout << "O valor de li eh: " << li << endl;
+
+    cout << "O valor de ui eh: " << ui << endl;
 
     return 0;
 }
