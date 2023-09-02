@@ -6,7 +6,7 @@ using namespace std;
 int main(){
 
     int a, b, c, delta;
-    float x1, x2;
+    float x1, x2, x, px;
 
     cout << "Digite o coeficiente a: ";
     cin >> a;
@@ -14,11 +14,16 @@ int main(){
     cin >> b;
     cout << "Digite o coeficiente c: ";
     cin >> c;
+    cout << "Digite um valor de x: ";
+    cin >> x;
+
+    px = a*pow(x,2) + b*x + c;
+    cout << "O valor de p(x) eh: " << px << endl;
 
     delta = pow(b,2) - 4*a*c;
 
     if(delta < 0){
-        cout << "Nao existem raizes reais!" << endl;
+        cout << "Nao existem raizes reais para o polinomio!" << endl;
         return 0;
     }
 
