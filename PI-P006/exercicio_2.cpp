@@ -22,6 +22,8 @@ int main(){
     c = 4*(a + b/3) - 5;
     /*  Nesta equação, a ordem dos calculos são diferentes das anteriores, gerando um novo resultado. */
 
+    c = pow(a,2) + 2*b + c;
+
     cout << endl << "O resultado da expressao eh: " << c << endl << endl;
 
     return 0;
