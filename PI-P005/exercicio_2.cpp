@@ -41,12 +41,15 @@ int main(){
     // }
 
     ch2 = 81;
+    ch3 = tolower(ch2);
 
     cout << "O caractere 81 corresponde a " << dec << (int)ch2 << " em decimal, "
          << oct << (int)ch2 << " em octal, 0x" << hex << (int)ch2 << " em hexadecimal e '"
          << ch2 << "' em caractere." << endl;
 
-
+    cout << "O correspondente minusculo ao caratere 81 eh " << dec << (int)ch3 << " em decimal, "
+         << oct << (int)ch3 << " em octal, 0x" << hex << (int)ch3 << " em hexadecimal e '"
+         << ch3 << "' em caractere." << endl;
 
     return 0;
 }
