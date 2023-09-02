@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(){
-    int a, b;
+    int a, b, c;
 
     cout <<endl << "Digite um numero: ";
     cin >> a;
@@ -14,7 +14,8 @@ int main(){
     if (a == b){
         cout << endl << "Estes numeros sao iguais";
     }else{
-        cout << endl << (a>b ? a : b) << " e maior" << endl;
+        c = (a>b ? a : b);
+        cout << c << " eh maior e eh " << (c%2==0 ? "par" : "impar") << endl;
     }
 
     return 0;
