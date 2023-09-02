@@ -12,9 +12,12 @@ int main(){
 
     if (b == 0){
         cout << "Divisao por zero nao eh possivel" << endl; 
-    }else{
+    }else if(a%b == 0){
+        cout << "A divisao entre os dois numeros eh exata." << endl;
         c = a/b;
         cout << "O quociente entre os dois numeros eh : " << c <<endl;
+    }else{
+        cout << "A divisao entre os dois numeros nao eh exata." << endl;
     }
     
     return 0;
