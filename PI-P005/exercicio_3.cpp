@@ -10,10 +10,12 @@ int main(){
     cout << "Digite outro numero: ";
     cin >> b;
 
-    c = abs(a-b);
-    // A função abs retorna o valor absoluto, em outras palavras o módulo de um valor
-
-    cout << "A diferenca absoluta entre os dois numeros eh : " << c <<endl;
-
+    if (b == 0){
+        cout << "Divisao por zero nao eh possivel" << endl; 
+    }else{
+        c = a/b;
+        cout << "O quociente entre os dois numeros eh : " << c <<endl;
+    }
+    
     return 0;
 }
