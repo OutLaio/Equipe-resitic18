@@ -3,13 +3,11 @@
 using namespace std;
 
 int main(){
-    unsigned long int uli = 0x7FFFFFFF; 
-    long int li = uli;
-    // O unsigned long int abrange todos os valores positivos de um long int
+    long int li = 0x80000000;
 
-    cout << "O valor de li eh: " << li << endl;
+    cout << "O maior valor de li eh: " << li-1 << endl;
 
-    cout << "O valor de uli eh: " << uli << endl;
+    cout << "O menor valor de li eh: " << li << endl;
 
     return 0;
 }
