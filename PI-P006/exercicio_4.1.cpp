@@ -9,7 +9,7 @@ int main(){
     cout << endl << "Digite o valor do raio: ";
     cin >> raio;
 
-    cout << "O diametro eh : " << 2*raio << endl;
+    cout << "O diametro eh : " << 2*raio*3.14152 << endl;
 
     return 0;
 }
