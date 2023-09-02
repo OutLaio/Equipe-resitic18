@@ -11,7 +11,11 @@ int main(){
     cout << "Digite outro numero: ";
     cin >> b;
 
-    cout << endl << (a>b ? a : b) << " e maior" << endl;
+    if (a == b){
+        cout << endl << "Estes numeros sao iguais";
+    }else{
+        cout << endl << (a>b ? a : b) << " e maior" << endl;
+    }
 
     return 0;
 }
