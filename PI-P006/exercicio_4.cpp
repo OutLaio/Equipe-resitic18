@@ -11,9 +11,9 @@ int main(){
     cout << "Digite outro numero: ";
     cin >> y;
 
-    z = (x>y ? x : y);
+    z = (x<y ? x : y);
 
-    cout << endl << "O maior eh: " << z << endl;
+    cout << endl << "O menor eh: " << z << endl;
 
     return 0;
 }
