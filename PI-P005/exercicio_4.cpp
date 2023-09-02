@@ -13,9 +13,9 @@ int main(){
     cout << "Digite outro numero real: ";
     cin >> y;
 
-    z = sqrt(pow(x,2)+pow(y,2));
-
-    cout << "A distancia euclidiana do ponto (" << x << ", " << y << ") eh: " << z << endl;
+    z = x*y;
+    cout.setf(ios::scientific);
+    cout << "O produto entre os dois numeros eh: " << z << endl;
 
     return 0;
 }
