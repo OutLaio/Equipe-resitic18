@@ -5,8 +5,9 @@ using namespace std;
 
 int main(){
 
-    cout << "Menor valor de um float: " << numeric_limits<float>::min() << endl;
-    cout << "Maior valor de um float: " << numeric_limits<float>::max() << endl;
+    float pif = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862;
+
+    cout << "Valor de pi: " << pif << endl;
 
     return 0;
 }
