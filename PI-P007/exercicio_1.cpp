@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<math.h>
 
@@ -11,6 +12,7 @@ int main(){
         cout << (i%3==0 ? "Fizz" : "");
         cout << (i%5==0 ? "Buzz" : "");
         cout << endl;
+
     }
     return 0;
 }
