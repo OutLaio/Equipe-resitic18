@@ -1,18 +1,23 @@
-#include <iostream>
+#include<iostream>
+#include<math.h>
+
 using namespace std;
 
 int main(){
-    int numero;
+    int numero, i;
 
-    cout << "Numero: ";
+    cout << "Digite um numero inteiro: ";
     cin >> numero;
-    cout << "Divisores de " << numero << ": ";
 
-    for(int i=numero; i>0; i--){
-        if(numero % i == 0){
-            cout << i;
-            if(i != 1) cout << ", ";
-            else cout << "." << endl;
+    cout << "Os divisores de " << numero << " sao: ";
+
+    for (i = 1; i <= numero; ++i) {
+        if (numero % i == 0) {
+            cout << i << " ";
         }
     }
+
+    cout << endl;
+
+    return 0;
 }

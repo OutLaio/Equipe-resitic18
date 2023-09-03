@@ -1,20 +1,28 @@
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
-int main(){
-    srand (time(NULL));
-    int numeroJogador = 0, numeroPartida = 0;
+int main() {
+    srand(time(0));
 
-    cout << "Jogo de Adivinhação" << endl;
-    numeroPartida = rand() % 100 + 1;
-    do{
-        cout << endl << "Escoha um numero: " << endl << "> ";
-        cin >> numeroJogador;
-        if(numeroPartida > numeroJogador) cout << "Baixo!" << endl;
-        else if(numeroPartida < numeroJogador) cout << "Alto!" << endl;
-        else cout << "Correto!" << endl;
-    }while(numeroJogador != numeroPartida);
+    int numeroAleatorio = rand() % 100 + 1;
+    int palpite, tentativas = 0;
+
+    do {
+        cout << "Tente adivinhar o numero (entre 1 e 100): ";
+        cin >> palpite;
+        tentativas++;
+
+        if (palpite < numeroAleatorio) {
+            cout << "Palpite baixo. Tente novamente." << endl;
+        } else if (palpite > numeroAleatorio) {
+            cout << "Palpite alto. Tente novamente." << endl;
+        } else {
+            cout << "Parabens! Voce acertou o numero " << numeroAleatorio << " em " << tentativas << " tentativas." << endl;
+        }
+    } while (palpite != numeroAleatorio);
 
     return 0;
 }

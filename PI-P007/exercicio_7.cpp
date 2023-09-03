@@ -1,24 +1,21 @@
 #include <iostream>
-#include <vector>
-#include <array>
+
 using namespace std;
 
-int main(){
+int main() {
+    int altura;
+    char ch = 'A';
 
-    char alfabeto[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-    int escolhaUsuario, inicio=0, fim=0, contador=2;
+    cout << "Digite a altura do padrao: ";
+    cin >> altura;
 
-    cout << "Altura: ";
-    cin >> escolhaUsuario;
-
-    for(int i=1; i<=escolhaUsuario; i++){
-        inicio += i - 1;
-        for(int j=inicio; j<=fim; j++){
-            cout << alfabeto[j];
+    for (int i = 1; i <= altura; i++) {
+        for (int j = 1; j <= i; j++) {
+            cout << ch;
+            ch++;
         }
         cout << endl;
-        fim += contador;
-        contador++;
     }
+
     return 0;
 }

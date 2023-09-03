@@ -1,24 +1,23 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
+#include<iostream>
+#include<math.h>
+
 using namespace std;
 
 int main(){
-    int numero;
-    string s_numero, temp;
+    int num, ori, rev = 0, dig;
 
-    cin >> numero;
-    s_numero = to_string(numero);
+    cout << "Digite um numero: ";
+    cin >> num;
 
-    temp = s_numero;
-    reverse(temp.begin(), temp.end());
+    ori = num;
 
-    if(s_numero.length() > 1){
-        temp == s_numero ? cout << "É palindromo!" : cout << "Não é palindromo!";
-        cout << endl;
-    } else {
-        cout << "Apesar de ter apenas um digito, é palindromo" << endl;
+    while (num > 0){
+        dig = num%10;
+        rev = rev*10 + dig;
+        num /= 10;
     }
+    
+    cout << "O numero " << ori << (ori==rev ? " " : " nao ") << "eh palidromo" << endl;
 
     return 0;
 }

@@ -1,19 +1,27 @@
-#include <iostream>
+#include<iostream>
+#include<math.h>
+
 using namespace std;
 
-int main(){
-    cout << "Numeros Primos: ";
-
-    for(int i=2; i<=100; i++){ 
-        if(i == 2 || i == 3 || i == 5 || i == 7){
-            if(i == 7) cout << i; // Controle de Formatação
-            else cout << i << ", ";
-        } else if (i % 2 != 0 && i % 3 != 3 && i % 5 != 0 && i % 7 != 0){
-            cout << ", " << i;
+bool isPrimo(int num) {
+    for (int i = 2; i * i <= num; ++i) {
+        if (num % i == 0) {
+            return false;
         }
     }
+    return true;
+}
 
+int main() {
+    int i;
+
+    cout << "Numeros primos de 1 a 100:" << endl;
+    for (i = 1; i <= 100; ++i) {
+        if (isPrimo(i)) {
+            cout << i << " ";
+        }
+    }
     cout << endl;
-    
+
     return 0;
 }

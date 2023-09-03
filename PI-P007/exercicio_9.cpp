@@ -1,24 +1,25 @@
 #include <iostream>
+
 using namespace std;
 
-int main(){
-    int numeroUsuario, soma=0;
-    
-    do{
-        cout << "Digite um número: ";
-        cin >> numeroUsuario;
+int main() {
+    int num, somaDivisores = 0;
 
-        if(numeroUsuario <= 0) cout << "Digite um valor maior que 0!" << endl;
-    }while(numeroUsuario <= 0);
-    
-    for(int i=numeroUsuario - 1; i>=1; i--){
-        if(numeroUsuario % i == 0){
-            soma += i;
+    cout << "Digite um numero inteiro positivo: ";
+    cin >> num;
+
+    if (num <= 0) {
+        cout << "O numero deve ser positivo." << endl;
+        return 1;
+    }
+
+    for (int i = 1; i <= num / 2; i++) {
+        if (num % i == 0) {
+            somaDivisores += i;
         }
     }
-    
-    if(soma == numeroUsuario) cout << numeroUsuario << " é um número perfeito!" << endl;
-    else cout << numeroUsuario << " não é um número perfeito!" << endl;
+
+    cout << endl << "O numero " << num << (somaDivisores==num ? " " : " nao ") << "eh um numero perfeito" << endl;
 
     return 0;
 }

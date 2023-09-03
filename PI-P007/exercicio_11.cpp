@@ -1,23 +1,29 @@
 #include <iostream>
-#include <string>
 #include <math.h>
+
 using namespace std;
 
-int main(){
+int main() {
+    int numero, numeroOriginal, soma = 0, digitos = 0;
 
-    string numeroUsuario;
-    int soma = 0;
+    cout << "Digite um numero inteiro: ";
+    cin >> numero;
+    numeroOriginal = numero;
 
-    cout << "Digite um número: ";
-    cin >> numeroUsuario;
-
-    for(char a : numeroUsuario){
-        soma += pow((a - '0'), numeroUsuario.size());
+    while (numero > 0) {
+        numero /= 10;
+        digitos++;
     }
 
-    if(to_string(soma) == numeroUsuario){
-        cout << numeroUsuario << " é um número Armstrong!" << endl;
-    } else cout << numeroUsuario << " não é um número Armstrong!" << endl;
+    numero = numeroOriginal;
+
+    while (numero > 0) {
+        int digito = numero % 10;
+        soma += pow(digito, digitos);
+        numero /= 10;
+    }
+
+    cout << endl << "O numero " << numeroOriginal << (soma == numeroOriginal ? " " : " nao ") << "eh um numero Armstrong" << endl;
 
     return 0;
 }
