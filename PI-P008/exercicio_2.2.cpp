@@ -22,6 +22,7 @@ int main(){
     cout << endl;
 
     for (i = 0; i < 15; i++){
+        media[i] = (notas1[i]+notas2[i])/2;
         cout << "O aluno #" << i+1;
         if (notas2[i] > notas1[i]){
             cout << " melhorou ";
@@ -30,7 +31,7 @@ int main(){
         }else{
             cout << " manteve ";
         }
-        cout << "a nota" << endl;
+        cout << "a nota, sua media foi de " << media[i] << endl;
     }
     
 
