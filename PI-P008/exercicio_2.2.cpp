@@ -14,5 +14,12 @@ int main(){
     }
     cout << endl;    
 
+    cout << "As notas 2 dos alunos são : " << endl;
+    for (i = 0; i < 15; i++){
+        notas2[i] = (rand()%101)/10.0;
+        cout << notas2[i] << " ";
+    }
+    cout << endl;
+
     return 0;
 }
