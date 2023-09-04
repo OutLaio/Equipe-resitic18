@@ -21,5 +21,18 @@ int main(){
     }
     cout << endl;
 
+    for (i = 0; i < 15; i++){
+        cout << "O aluno #" << i+1;
+        if (notas2[i] > notas1[i]){
+            cout << " melhorou ";
+        }else if (notas2[i] < notas1[i]){
+            cout << " piorou ";
+        }else{
+            cout << " manteve ";
+        }
+        cout << "a nota" << endl;
+    }
+    
+
     return 0;
 }
