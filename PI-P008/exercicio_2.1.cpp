@@ -12,6 +12,18 @@ int main(){
     }
 
     for (i = 0; i < 250; i++){
+        max += estacoes[i];
+    }
+
+    cout << "A temperatura media foi " << max/250 << "°C" << endl;
+    
+
+
+
+
+    /*
+    Letra b)
+    for (i = 0; i < 250; i++){
         if (estacoes[i] > max){
             max = estacoes[i];
         }
@@ -21,6 +33,7 @@ int main(){
     }
     cout << "A maxima temperatura reportada foi " << max << "°C" << endl;
     cout << "A minima temperatura reportada foi " << min << "°C" << endl;
+    */
 
     return 0;
 }
