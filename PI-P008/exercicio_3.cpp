@@ -26,38 +26,75 @@ int main(){
     }
 
     switch (mes){
+        case 1:
+            temp = "janeiro";
+            if(dia > 31)
+                erro = true;
+            break;
         case 2:
-            if (dia > 29)
+            temp = "fevereiro";
+            if(dia > 29)
+                erro = true;
+            break;
+        case 3:
+            temp = "marco";
+            if(dia > 31)
                 erro = true;
             break;
         case 4:
-            if (dia > 30)
+            temp = "abril";
+            if(dia > 30)
+                erro = true;
+            break;
+        case 5:
+            temp = "maio";
+            if(dia > 31)
                 erro = true;
             break;
         case 6:
-            if (dia > 30)
+            temp = "junho";
+            if(dia > 30)
+                erro = true;
+            break;
+        case 7:
+            temp = "julho";
+            if(dia > 31)
+                erro = true;
+            break;
+        case 8:
+            temp = "agosto";
+            if(dia > 31)
                 erro = true;
             break;
         case 9:
-            if (dia > 30)
+            temp = "setembro";
+            if(dia > 30)
+                erro = true;
+            break;
+        case 10:
+            temp = "outubro";
+            if(dia > 31)
                 erro = true;
             break;
         case 11:
-            if (dia > 30)
+            temp = "novembro";
+            if(dia > 30)
+                erro = true;
+            break;
+        case 12:
+            temp = "dezembro";
+            if(dia > 31)
                 erro = true;
             break;
         default:
-            if (dia > 31 || mes > 12)
-                erro = true;
+            erro = true;
             break;
     }
     
     if (erro){
         cout << "Data invalida!!" << endl;
     }else{
-        cout << "Dia: " << dia << endl
-            << "Mes: " << mes << endl
-            << "Ano: " << ano << endl;
+        cout << endl << dia << " de " << temp << " de " << ano << endl;
     }
 
 
