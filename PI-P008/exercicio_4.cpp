@@ -35,16 +35,24 @@ void salvarImagemPGM(const string& nomeArquivo, int imagem[WIDTH][HEIGHT]) {
 }
 
 int main(){
-    int img[WIDTH][HEIGHT];
+    int img[WIDTH][HEIGHT], histo[256] = {0};
+
     srand(time(nullptr));
 
     for (int i = 0; i < HEIGHT; i++){
         for (int j = 0; j < WIDTH; j++){
             img[i][j] = rand()%256;
+            histo[img[i][j]]++;
         }
     }
     salvarImagemPGM("imagem_gerada1.pgm", img);
 
     cout << "Imagem salva com sucesso!" << endl;
+
+    for (int i = 0; i < 256; i++){
+        cout << "Intensidade " << i << ": " << histo[i] << " pixels." << endl;
+    }
+    
+
     return 0;
 }
