@@ -92,6 +92,14 @@ void insere(vector<string> &alunos, vector<float> &notas, int n){
 void excluir(vector<string> &alunos, vector<float> &notas){
     string aluno;
     
+    if(alunos.size() == 0){
+        system("cls");
+        cout << "Nao ha alunos cadastrados!" << endl;
+        cout << endl << "(Pressione qualquer tecla para continuar...)";
+        _getch();
+        return;
+    }
+
     system("cls");
     cout << "Digite o nome do aluno:" << endl << ">";
     cin >> aluno;
@@ -104,10 +112,79 @@ void excluir(vector<string> &alunos, vector<float> &notas){
     }else{
         size_t pos = distance(alunos.begin(), it);
         alunos.erase(alunos.begin()+pos);
-        notas.erase(notas.begin()+pos*3, notas.begin()+(pos*3+2));
+        notas.erase(notas.begin()+pos*3, notas.begin()+(pos*3+3));
     }
 }
 
+void altera(vector<string> &alunos, vector<float> &notas){
+    string aluno;
+    float nota;
+    size_t id;
+    
+    if(alunos.size() == 0){
+        system("cls");
+        cout << "Nao ha alunos cadastrados!" << endl;
+        cout << endl << "(Pressione qualquer tecla para continuar...)";
+        _getch();
+        return;
+    }
+
+    system("cls");
+    cout << "Digite o nome do aluno:" << endl << ">";
+    cin >> aluno;
+
+    auto it = find(alunos.begin(), alunos.end(), aluno);
+    if(it == alunos.end()){
+        cout << endl << "Aluno nao encontrado!" << endl
+             << "(Pressione qualquer tecla para continuar...)";
+        system("pause");
+    }else{
+        size_t pos = distance(alunos.begin(), it);
+        system("cls");
+        cout << "O aluno " << alunos.at(pos) << " possui as notas:" << endl << endl
+             << "Nota #1: " << notas.at(pos*3) << endl << "Nota #2: " << notas.at(pos*3+1)
+             << endl << "Media = " << notas.at(pos*3+2) << endl;
+        cout << endl << "Qual nota deseja alterar? (Digite 0 para voltar)" << endl << "#";
+        cin >> id;
+        
+        while (id != 1 && id != 2){
+            if(id == 0)
+                return;
+            system("cls");
+            cout << "O aluno " << alunos.at(pos) << " possui as notas:" << endl << endl
+                 << "Nota #1 " << notas.at(pos*3) << endl << "Nota #2 " << notas.at(pos*3+1)
+                 << endl << "media = " << notas.at(pos*3+2) << endl;
+            cout << endl << "Digite um id valido (#1, #2 ou #0 para sair):" << endl << "#";
+            cin >> id;
+        }
+        cout << "Digite a nova nota:" << endl << ">";
+        cin >> nota;
+
+        notas[pos*3+id-1] = nota;
+        notas[pos*3+2] = (notas[pos*3]+notas[pos*3+1])/2;
+    }
+    return;
+}
+
+void imprime(vector<string> &alunos, vector<float> &notas){
+    if(alunos.size() == 0){
+        system("cls");
+        cout << "Nao ha alunos cadastrados!" << endl;
+        cout << endl << "(Pressione qualquer tecla para continuar...)";
+        _getch();
+        return;
+    }
+    system("cls");
+    cout << "Aluno\tNota #1\tNota #2\tMedia\tSituacao" << endl << endl;
+    for (size_t i = 0; i < alunos.size(); i++){
+        cout << alunos[i] << "\t"
+             << notas[i*3] << "\t"
+             << notas[i*3+1] << "\t"
+             << notas[i*3+2] << "\t"
+             << (notas[i*3+2] >= 7 ? "APROVADO" : "REPROVADO") << endl;
+    }
+    
+}
 
 void menuOpcoes(void){
     int seta, posicao = 0, n = qtdAlunos();
@@ -135,14 +212,10 @@ void menuOpcoes(void){
                 excluir(alunos, notas);
                 break;
             case 2:
-                cout << posicao;
+                altera(alunos, notas);
                 break;
             case 3:
-                system("cls");
-                for (int i = 0; i < alunos.size(); i++){
-                    cout << alunos.at(i) << endl;
-                }
-                _getch();
+                imprime(alunos, notas);
                 system("pause");
                 break;
             case 4:
