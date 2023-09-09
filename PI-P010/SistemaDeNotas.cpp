@@ -169,9 +169,8 @@ void altera(vector<string> &alunos, vector<float> &notas){
 void imprime(vector<string> &alunos, vector<float> &notas){
     if(alunos.size() == 0){
         system("cls");
-        cout << "Nao ha alunos cadastrados!" << endl;
-        cout << endl << "(Pressione qualquer tecla para continuar...)";
-        _getch();
+        cout << "Nao ha alunos cadastrados!" << endl << endl;
+        system("pause");
         return;
     }
     system("cls");
@@ -216,7 +215,6 @@ void menuOpcoes(void){
                 break;
             case 3:
                 imprime(alunos, notas);
-                system("pause");
                 break;
             case 4:
                 seta = 27;
