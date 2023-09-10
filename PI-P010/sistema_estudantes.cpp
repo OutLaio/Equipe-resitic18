@@ -24,40 +24,40 @@ vector<float> notasEstudantes;
 /**
  * @brief Função para controlar escolha do usuário em menus.
 */
-static void inicio();
+void inicio();
 /**
  * @brief Função para exibir menu incial.
 */
-static void menuPrincipal();
+void menuPrincipal();
 /**
  * @brief Função para exibir menu de alteração de dados.
 */
-static void menuAlterar();
+void menuAlterar();
 /**
  * @brief Função para controlar inserção de estudantes.
 */
-static void inserirEstudante();
+void inserirEstudante();
 /**
  * @brief Função para controlar exclusão de estudantes.
 */
-static void excluirEstudante();
+void excluirEstudante();
 /**
  * @brief Função para alterar os dados dos estudantes.
 */
-static void alterarEstudante();
+void alterarEstudante();
 /**
  * @brief Função para imprimir tabela com nomes e notas.
 */
-static void tabelaEstudantes();
+void tabelaEstudantes();
 /**
  * @brief Função para ordenar lexicográficamente lista de nomes.
  * @param nomes Vector<string> com nomes dos estudantes.
 */
-static void ordenaAbc(vector<string> &nomes);
+void ordenaAbc(vector<string> &nomes);
 /**
  * @brief Função para encontrar o maior nome entre os estudantes para ajustar a tabela.
 */
-static void procuraMaiorNome();
+void procuraMaiorNome();
 
 // INICO DO PROGRAMA
 int main(){
@@ -65,7 +65,7 @@ int main(){
     return 0;
 }
 
-static void inicio(){
+void inicio(){
 
     int escolhaUsuario;
     system(CLEAR_SCREEN);
@@ -112,7 +112,7 @@ static void inicio(){
     }while(escolhaUsuario != 5);
 
 }
-static void menuPrincipal(){
+void menuPrincipal(){
     cout << endl << "Armazenado/Limite: [" << nomesEstudantes.size() << "/" << qntEstudantes << "]" << endl;
     cout << endl << "Escolha [1 a 4]" << endl;
     cout << "1. Adicionar estudante" << endl;
@@ -122,7 +122,7 @@ static void menuPrincipal(){
     cout << "5. Sair" << endl;
     cout << "> ";
 }
-static void menuAlterar(){
+void menuAlterar(){
     cout << endl << "Escolha o que deseja alterar:" << endl;
     cout << "1. Nome" << endl;
     cout << "2. Nota I" << endl;
@@ -130,7 +130,7 @@ static void menuAlterar(){
     cout << "4. Voltar" << endl;
     cout << "> ";
 }
-static void inserirEstudante(){
+void inserirEstudante(){
     string nome;
     float notaI, notaII;
 
@@ -154,7 +154,7 @@ static void inserirEstudante(){
 
     cout << "Estudante cadastrado com sucesso!" << endl;
 }
-static void excluirEstudante(){
+void excluirEstudante(){
     string nome = "";
     bool estudanteEncontrado = false;
     
@@ -179,7 +179,7 @@ static void excluirEstudante(){
     if(estudanteEncontrado) cout << "Estudante deletado com sucesso!" << endl;
     else cout << "Estudante não encontrado. Verifique se digitou corretamente." << endl;
 }
-static void alterarEstudante(){
+void alterarEstudante(){
     string nomeEscolhido = "", novoNome = "";
     float novaNota = 0.0;
     int escolhaAlterar = 0, indexEstudante = 0;
@@ -193,7 +193,7 @@ static void alterarEstudante(){
         cout << endl << "Obs: Atente-se a escrita do nome." << endl;
         cout << "Digite o nome do estudante que irá alterar:" << endl << "> ";
         cin.ignore();
-        cin >> nomeEscolhido;
+        getline(cin, nomeEscolhido);
 
         for(size_t i=0; i<nomesEstudantes.size(); i++){
             if(nomesEstudantes.at(i) == nomeEscolhido){
@@ -241,7 +241,7 @@ static void alterarEstudante(){
         }
     }while(escolhaAlterar != 4);
 }
-static void tabelaEstudantes(){
+void tabelaEstudantes(){
     int contador = 0;
     float media = 0.0;
     string resultado = "";
@@ -269,7 +269,7 @@ static void tabelaEstudantes(){
         contador += 2;
     }
 }
-static void ordenaAbc(vector<string> &nomes){
+void ordenaAbc(vector<string> &nomes){
     int n = nomes.size() - 1;
     int contador = 0;
     bool trocou;
@@ -288,6 +288,6 @@ static void ordenaAbc(vector<string> &nomes){
         n--;
     }while(trocou);
 }
-static void procuraMaiorNome(){
+void procuraMaiorNome(){
     for(string nome : nomesEstudantes) if(nome.length() > maiorNome) maiorNome = nome.length();
 }
