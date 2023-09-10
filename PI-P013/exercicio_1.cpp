@@ -1,397 +1,118 @@
-#include<iostream>
-#include<sstream>
-#include<string>
-#include<vector>
-#include<conio.h>
-#include<math.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <iomanip>
+#include <algorithm>
 
 using namespace std;
 
-typedef struct T_passagem{
-    string nome, cpf, data, hora;
-    int idade, linha, acento;
-} Passagem;
-
-void dispLinhas(int posicao, vector<int> disponivel){
-    system("cls");
-    cout << "======= Viacao Residencia =======" << endl << endl;
-    cout << "== Selecione a linha da viagem ==" << endl << endl;
-    for (int i = 0; i < 10; i++){
-        if(disponivel[i] == 1)
-            cout << "\t*** ONIBUS CHEIO ***" << endl;
-        if (i == posicao)
-            cout << "-> ";
-        switch (i){
-            case 0:
-                cout << "IDA ---- 08:00h -- RJ x SP" << endl;
-                break;
-            case 1:
-                cout << "VOLTA -- 09:00h -- SP x RJ" << endl;
-                break;
-            case 2:
-                cout << "IDA ---- 10:00h -- RJ x SP" << endl;
-                break;
-            case 3:
-                cout << "VOLTA -- 11:00h -- SP x RJ" << endl;
-                break;
-            case 4:
-                cout << "IDA ---- 12:00h -- RJ x SP" << endl;
-                break;
-            case 5:
-                cout << "VOLTA -- 13:00h -- SP x RJ" << endl;
-                break;
-            case 6:
-                cout << "IDA ---- 14:00h -- RJ x SP" << endl;
-                break;
-            case 7:
-                cout << "VOLTA -- 15:00h -- SP x RJ" << endl;
-                break;
-            case 8:
-                cout << "IDA ---- 16:00h -- RJ x SP" << endl;
-                break;
-            case 9:
-                cout << "VOLTA -- 17:00h -- SP x RJ" << endl;
-                break;
-        default:
-            break;
-        }
-    }
-}
-
-int linhaOpcoes(vector<vector<int>> *onibus){
-    int seta, posicao = 0, onibusCheio = 0, ocupadas = 0;
-    vector<int> disponivel(10, 0);
-
-    for (int i = 0; i < 10; i++){
-        ocupadas = 0;
-        for (int j = 0; j < 40; j++){
-            if((*onibus)[i][j] == 1)
-                ocupadas++;
-        }
-        if (ocupadas == 40){
-            disponivel[i] = 1;
-            onibusCheio++;
-        }
-    }
-    if(onibusCheio == 10){
-        system("cls");
-        cout << "Todos os onibus estao cheios!" << endl;
-        system("pause");
-        return -1;
-    }
-    do{
-        if(seta==80){
-            posicao++;
-            if (disponivel[posicao] == 1)
-                posicao++;
-        }
-        if(seta==72){
-            posicao--;
-            if (disponivel[posicao] == 1)
-                posicao--;
-        }
-        if(posicao>9)
-            posicao=0;
-        if(posicao<0)
-            posicao=9;
-
-        dispLinhas(posicao, disponivel);
-        seta = _getch();
-
-        if(seta == 13){
-            return posicao;
-        }
-    } while (seta!=27);
-    return -1;
-}
-
-string getData(){
-    string temp, data;
-    int dia, mes;
-    bool erro;
-
-    system("cls");
-    cout << "Informe a data da viagem:" << endl << "> ";
-    cin >> data;
-
-    do{
-        erro = false;
-        istringstream str(data);
-
-        getline(str, temp, '/');
-        dia = stoi(temp);
-        getline(str, temp, '/');
-        mes = stoi(temp);
-
-        if (dia < 1){
-            erro = true;
-        }
-
-        switch (mes){
-            case 2:
-                if (dia > 29)
-                    erro = true;
-                break;
-            case 4:
-                if (dia > 30)
-                    erro = true;
-                break;
-            case 6:
-                if (dia > 30)
-                    erro = true;
-                break;
-            case 9:
-                if (dia > 30)
-                    erro = true;
-                break;
-            case 11:
-                if (dia > 30)
-                    erro = true;
-                break;
-            default:
-                if (dia > 31 || mes > 12)
-                    erro = true;
-                break;
-        }
-        if(erro){
-            system("cls");
-            cout << "Por favor, digite uma data valida:" << endl << "> ";
-            cin >> data;
-        }
-    } while (erro);
-    
-    return data;
-}
-
-string getHora(int linha){
-    string hora;
-    switch (linha){
-        case 0:
-            hora = "08:00";
-            break;
-        case 1:
-            hora = "09:00";
-            break;
-        case 2:
-            hora = "10:00";
-            break;
-        case 3:
-            hora = "11:00";
-            break;
-        case 4:
-            hora = "12:00";
-            break;
-        case 5:
-            hora = "13:00";
-            break;
-        case 6:
-            hora = "14:00";
-            break;
-        case 7:
-            hora = "15:00";
-            break;
-        case 8:
-            hora = "16:00";
-            break;
-        case 9:
-            hora = "17:00";
-            break;
-        default:
-            break;
-    }
-    return hora;
-}
-
-void dispAcento(vector<int> poltronas){
-    system("cls");
-    cout << "================= Viacao Residencia ==================" << endl << endl;
-    cout << "=========== Selecione um acento disponivel ===========" << endl << endl;
-    for (int i = 1; i <= 4; i++){
-        cout << "\t";
-        for (int j = 0; j < 10; j++){
-            if (poltronas[4*j + i - 1] == 1){
-                cout << "--" << "  ";
-            }else{
-                if(j*4 + i < 10)
-                    cout << " ";
-                cout << (j*4 + i) << "  ";
-            }
-        }
-        cout << endl;
-        if(i == 2){
-            cout << endl;
-        }
-    }
-}
-
-int getAcento(vector<int> *poltronas){
-    int acento = 0;
-
-    dispAcento(*poltronas);
-
-    while (acento == 0){
-        cout << endl << "> ";
-        cin >> acento;
-        if((*poltronas)[acento-1] == 1 || acento > 40 || acento <= 0){
-            dispAcento(*poltronas);
-            acento = 0;
-            cout << endl << "Acento nao disponivel!";
-        }
-    }
-    (*poltronas)[acento-1] = 1;
-    return acento;
-}
-
-int getDadosViagem(Passagem* passageiro, vector<vector<int>> *onibus){
-    
-    passageiro->data = getData();
-    passageiro->linha = linhaOpcoes(onibus);
-    int li = passageiro->linha;
-    if (li == -1){
-        return 0;
-    }
-    passageiro->hora = getHora(li);
-    passageiro->acento = getAcento(&onibus->at(li));
-    return 1;
-}
-
-int getDadosPassageiro(Passagem* passageiro){
-    string nome, sobrenome, cpf;
+struct Passagem {
+    int numeroAssento;
+    string dataHora;
+    string CPF;
+    string nome;
     int idade;
-    char confirma;
+};
 
-    do{
-        system("cls");
-        cout << "Digite o primeiro nome do passageiro:" << endl << "> ";
-        cin >> nome;
-        cout << "Digite o ultimo sobrenome do passageiro:" << endl << "> ";
-        cin >> sobrenome;
-        cout << "Digite o CPF do passageiro (Formato: 123.456.789-10):" << endl << "> ";
-        cin >> cpf;
-        cout << "Digite a idade do passageiro:" << endl << "> ";
-        cin >> idade;
+struct Viagem {
+    vector<Passagem> passageiros;
+};
 
-        passageiro->nome = nome + " " + sobrenome;
-        passageiro->cpf = cpf;
-        passageiro->idade = idade;
-
-        system("cls");
-        cout << "Confirme os dados do passageiro:" << endl << endl
-            << "Nome Completo: " << passageiro->nome << endl
-            << "CPF: " << passageiro->cpf << endl
-            << "Idade: " << passageiro->idade << endl << endl
-            << "Os dados estao corretos? ([S]im / [N]ao)" << endl << "> ";
-        cin >> confirma;
-        if (toupper(confirma) != 'S'){
-            cout << "Refazer ou Sair? ([R]efazer / [S]air)" << endl << "> ";
-            cin >> confirma;
-            if(toupper(confirma) == 'S')
-                return 0;
-        }
-    }while(toupper(confirma) != 'S');
-
-    return 1;
-}
-
-void incluirPassagem(vector<vector<Passagem>> *viagens, vector<vector<int>> *onibus){
+void incluirPassagem(vector<Passagem>& passagens, int assento, const string& dataHora, const string& CPF, const string& nome, int idade) {
     Passagem passageiro;
-    vector<Passagem> viagem;
-
-    if(!getDadosViagem(&passageiro, onibus))
-        return;
-    if(!getDadosPassageiro(&passageiro))
-        return;
-    cout << "aqui";
-    viagem.push_back(passageiro);
-    (*viagens)[passageiro.linha] = viagem;
-    cout << " chegou";
-    return;
+    passageiro.numeroAssento = assento;
+    passageiro.dataHora = dataHora;
+    passageiro.CPF = CPF;
+    passageiro.nome = nome;
+    passageiro.idade = idade;
+    
+    passagens.push_back(passageiro);
 }
 
-// void buscarInfo(vector<vector<Passagem>> *viagens, vector<vector<int>> *onibus){
-
-//     system("cls");
-//     cout << "Informe o numero da poltrona"
-
-// }
-
-
-void dispMenu(int posicao){
-    system("cls");
-    cout << "======= Viacao Residencia =======" << endl << endl;
-    for (int i = 0; i < 5; i++){
-        if (i == posicao)
-            cout << "-> ";
-        switch (i){
-            case 0:
-                cout << "Registrar passagem" << endl;
-                break;
-            case 1:
-                cout << "Exibir informacoes sobre passageiros" << endl;
-                break;
-            case 2:
-                cout << "Arrecadacoes" << endl;
-                break;
-            case 3:
-                cout << "Medias de idade dos passageiros" << endl << endl;
-                break;
-            case 4:
-                cout << "Sair" << endl;
-                break;
-        default:
-            break;
+string localizarNomeDoPassageiro(const Viagem& viagem, int poltrona) {
+    for (const Passagem& passageiro : viagem.passageiros) {
+        if (passageiro.numeroAssento == poltrona) {
+            return passageiro.nome;
         }
+    }
+    return "Poltrona vazia";
+}
+
+void imprimirTotalArrecadadoViagem(const Viagem& viagem) {
+    double totalArrecadado = viagem.passageiros.size() * 80.0;
+    cout << "Total arrecadado para esta viagem: R$" << fixed << setprecision(2) << totalArrecadado << endl;
+}
+
+void imprimirTotalArrecadadoMes(const vector<Viagem>& viagens, const string& mesSelecionado) {
+    double arrecadacaoMes = 0.0;
+    for (const Viagem& viagem : viagens) {
+        for (const Passagem& passageiro : viagem.passageiros) {
+            if (passageiro.dataHora.substr(5, 2) == mesSelecionado) {
+                arrecadacaoMes += 80.0;
+            }
+        }
+    }
+    cout << "Total arrecadado no mes " << mesSelecionado << ": R$" << fixed << setprecision(2) << arrecadacaoMes << endl;
+}
+
+void imprimirTotalArrecadadoHorario(const vector<Viagem>& viagens, const string& horarioSelecionado) {
+    double arrecadacaoHorario = 0.0;
+    for (const Viagem& viagem : viagens) {
+        for (const Passagem& passageiro : viagem.passageiros) {
+            if (passageiro.dataHora == horarioSelecionado) {
+                arrecadacaoHorario += 80.0;
+            }
+        }
+    }
+    cout << "Total arrecadado para o horario " << horarioSelecionado << ": R$" << fixed << setprecision(2) << arrecadacaoHorario << endl;
+}
+
+double calcularMediaIdade(const vector<Viagem>& viagens) {
+    int totalIdades = 0;
+    int totalPassageiros = 0;
+    
+    for (const Viagem& viagem : viagens) {
+        for (const Passagem& passageiro : viagem.passageiros) {
+            totalIdades += passageiro.idade;
+            totalPassageiros++;
+        }
+    }
+    
+    if (totalPassageiros > 0) {
+        return static_cast<double>(totalIdades) / totalPassageiros;
+    } else {
+        return 0.0; 
     }
 }
 
-void menuOpcoes(void){
-    int seta, posicao = 0;
-    vector<Passagem> passageiro(40);
-    vector<vector<Passagem>> viagens(10, passageiro);
-    vector<int> poltronas(40, 0);
-    vector<vector<int>> onibus(10, poltronas);
-    do{
-        if(seta==80)
-            posicao++;
-        if(seta==72)
-            posicao--;
-        if(posicao>4)
-            posicao=0;
-        if(posicao<0)
-            posicao=4;
+int main() {
+    vector<Viagem> viagens(10);
 
-        dispMenu(posicao);
-        seta = _getch();
-
-        if(seta == 13){
-            switch (posicao){
-            case 0:
-                incluirPassagem(&viagens, &onibus);
-                break;
-            case 1:
-                // buscarInfo(&viagens, &onibus);
-                break;
-            case 2:
-                // arrecadacoes(viagens);
-                break;
-            case 3:
-                // mediaIdade(viagens);
-                break;
-            case 4:
-                seta = 27;
-                break;
-            default:
-                break;
-            }
-        }
-    } while (seta!=27);
     
-}
+    incluirPassagem(viagens[0].passageiros, 1, "2023-09-10 10:00", "12345678901", "Laio", 23);
+    incluirPassagem(viagens[0].passageiros, 2, "2023-09-10 10:00", "98765432100", "Joao", 24);
+    incluirPassagem(viagens[1].passageiros, 2, "2023-09-10 13:00", "12345678901", "Brendom", 22);
+    incluirPassagem(viagens[3].passageiros, 23, "2023-09-10 15:00", "98765432100", "Albert", 27);
+    incluirPassagem(viagens[2].passageiros, 7, "2023-09-10 12:00", "12345678901", "Degas", 32);
+    incluirPassagem(viagens[1].passageiros, 9, "2023-09-10 13:00", "98765432100", "Vitor", 30);
 
-int main(){
+    imprimirTotalArrecadadoViagem(viagens[0]);
+    imprimirTotalArrecadadoMes(viagens, "09");
+    imprimirTotalArrecadadoHorario(viagens, "2023-09-10 10:00");
 
-    menuOpcoes();
-    system("cls");
+    int viagemSelecionada = 0, poltronaDesejada = 2;
+    string nomePassageiro = localizarNomeDoPassageiro(viagens[viagemSelecionada], poltronaDesejada);
+
+    if (nomePassageiro != "Poltrona vazia") {
+        cout << "Nome do passageiro da poltrona " << poltronaDesejada << " na viagem " << viagemSelecionada << ": " << nomePassageiro << endl;
+    } else {
+        cout << "A poltrona " << poltronaDesejada << " na viagem " << viagemSelecionada << " está vazia." << endl;
+    }
+
+    double mediaIdade = calcularMediaIdade(viagens);
     
+    cout << "Media de idade dos passageiros: " << fixed << setprecision(2) << mediaIdade << " anos" << endl;
+
+
     return 0;
 }
