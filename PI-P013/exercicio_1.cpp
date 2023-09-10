@@ -2,6 +2,7 @@
 #include<sstream>
 #include<string>
 #include<vector>
+#include<conio.h>
 #include<math.h>
 
 using namespace std;
@@ -11,11 +12,13 @@ typedef struct T_passagem{
     int idade, linha, acento;
 } Passagem;
 
-void dispLinhas(int posicao){
+void dispLinhas(int posicao, vector<int> disponivel){
     system("cls");
     cout << "======= Viacao Residencia =======" << endl << endl;
     cout << "== Selecione a linha da viagem ==" << endl << endl;
     for (int i = 0; i < 10; i++){
+        if(disponivel[i] == 1)
+            cout << "\t*** ONIBUS CHEIO ***" << endl;
         if (i == posicao)
             cout << "-> ";
         switch (i){
@@ -55,26 +58,51 @@ void dispLinhas(int posicao){
     }
 }
 
-int linhaOpcoes(void){
-    int seta, posicao = 0;
+int linhaOpcoes(vector<vector<int>> *onibus){
+    int seta, posicao = 0, onibusCheio = 0, ocupadas = 0;
+    vector<int> disponivel(10, 0);
+
+    for (int i = 0; i < 10; i++){
+        ocupadas = 0;
+        for (int j = 0; j < 40; j++){
+            if((*onibus)[i][j] == 1)
+                ocupadas++;
+        }
+        if (ocupadas == 40){
+            disponivel[i] = 1;
+            onibusCheio++;
+        }
+    }
+    if(onibusCheio == 10){
+        system("cls");
+        cout << "Todos os onibus estao cheios!" << endl;
+        system("pause");
+        return -1;
+    }
     do{
-        if(seta==80)
+        if(seta==80){
             posicao++;
-        if(seta==72)
+            if (disponivel[posicao] == 1)
+                posicao++;
+        }
+        if(seta==72){
             posicao--;
+            if (disponivel[posicao] == 1)
+                posicao--;
+        }
         if(posicao>9)
             posicao=0;
         if(posicao<0)
             posicao=9;
 
-        dispLinhas(posicao);
+        dispLinhas(posicao, disponivel);
         seta = _getch();
 
         if(seta == 13){
-            return posicao+1;
+            return posicao;
         }
     } while (seta!=27);
-    return 0;
+    return -1;
 }
 
 string getData(){
@@ -174,18 +202,14 @@ string getHora(int linha){
     return hora;
 }
 
-void dispAcento(void){
+void dispAcento(vector<int> poltronas){
     system("cls");
-    int vet[40] = {0};
-    vet[0] = 1;
-    vet[9] = 1;
-    vet[15] = 1;
-
-
+    cout << "================= Viacao Residencia ==================" << endl << endl;
+    cout << "=========== Selecione um acento disponivel ===========" << endl << endl;
     for (int i = 1; i <= 4; i++){
-        cout << "\t\t";
+        cout << "\t";
         for (int j = 0; j < 10; j++){
-            if (vet[4*j + i - 1] == 1){
+            if (poltronas[4*j + i - 1] == 1){
                 cout << "--" << "  ";
             }else{
                 if(j*4 + i < 10)
@@ -198,36 +222,99 @@ void dispAcento(void){
             cout << endl;
         }
     }
-    
 }
 
-int getAcento(void){
-    int acento;
+int getAcento(vector<int> *poltronas){
+    int acento = 0;
 
-    dispAcento();
+    dispAcento(*poltronas);
 
-
+    while (acento == 0){
+        cout << endl << "> ";
+        cin >> acento;
+        if((*poltronas)[acento-1] == 1 || acento > 40 || acento <= 0){
+            dispAcento(*poltronas);
+            acento = 0;
+            cout << endl << "Acento nao disponivel!";
+        }
+    }
+    (*poltronas)[acento-1] = 1;
     return acento;
 }
 
-void getDados(Passagem* passageiro){
+int getDadosViagem(Passagem* passageiro, vector<vector<int>> *onibus){
     
     passageiro->data = getData();
-    passageiro->linha = linhaOpcoes();
-    passageiro->hora = getHora(passageiro->linha);
-    passageiro->acento = getAcento();
-    passageiro->nome = 
-    passageiro->cpf = 
-    passageiro->idade = 
-    
+    passageiro->linha = linhaOpcoes(onibus);
+    int li = passageiro->linha;
+    if (li == -1){
+        return 0;
+    }
+    passageiro->hora = getHora(li);
+    passageiro->acento = getAcento(&onibus->at(li));
+    return 1;
+}
+
+int getDadosPassageiro(Passagem* passageiro){
+    string nome, sobrenome, cpf;
+    int idade;
+    char confirma;
+
+    do{
+        system("cls");
+        cout << "Digite o primeiro nome do passageiro:" << endl << "> ";
+        cin >> nome;
+        cout << "Digite o ultimo sobrenome do passageiro:" << endl << "> ";
+        cin >> sobrenome;
+        cout << "Digite o CPF do passageiro (Formato: 123.456.789-10):" << endl << "> ";
+        cin >> cpf;
+        cout << "Digite a idade do passageiro:" << endl << "> ";
+        cin >> idade;
+
+        passageiro->nome = nome + " " + sobrenome;
+        passageiro->cpf = cpf;
+        passageiro->idade = idade;
+
+        system("cls");
+        cout << "Confirme os dados do passageiro:" << endl << endl
+            << "Nome Completo: " << passageiro->nome << endl
+            << "CPF: " << passageiro->cpf << endl
+            << "Idade: " << passageiro->idade << endl << endl
+            << "Os dados estao corretos? ([S]im / [N]ao)" << endl << "> ";
+        cin >> confirma;
+        if (toupper(confirma) != 'S'){
+            cout << "Refazer ou Sair? ([R]efazer / [S]air)" << endl << "> ";
+            cin >> confirma;
+            if(toupper(confirma) == 'S')
+                return 0;
+        }
+    }while(toupper(confirma) != 'S');
+
+    return 1;
+}
+
+void incluirPassagem(vector<vector<Passagem>> *viagens, vector<vector<int>> *onibus){
+    Passagem passageiro;
+    vector<Passagem> viagem;
+
+    if(!getDadosViagem(&passageiro, onibus))
+        return;
+    if(!getDadosPassageiro(&passageiro))
+        return;
+    cout << "aqui";
+    viagem.push_back(passageiro);
+    (*viagens)[passageiro.linha] = viagem;
+    cout << " chegou";
     return;
 }
 
-void incluirPassagem(vector<vector<Passagem>> viagens){
-    Passagem passageiro;
+// void buscarInfo(vector<vector<Passagem>> *viagens, vector<vector<int>> *onibus){
 
-    getDados(&passageiro);
-}
+//     system("cls");
+//     cout << "Informe o numero da poltrona"
+
+// }
+
 
 void dispMenu(int posicao){
     system("cls");
@@ -259,7 +346,10 @@ void dispMenu(int posicao){
 
 void menuOpcoes(void){
     int seta, posicao = 0;
-    vector<vector<Passagem>> viagens;
+    vector<Passagem> passageiro(40);
+    vector<vector<Passagem>> viagens(10, passageiro);
+    vector<int> poltronas(40, 0);
+    vector<vector<int>> onibus(10, poltronas);
     do{
         if(seta==80)
             posicao++;
@@ -276,16 +366,16 @@ void menuOpcoes(void){
         if(seta == 13){
             switch (posicao){
             case 0:
-                incluirPassagem(viagens);
+                incluirPassagem(&viagens, &onibus);
                 break;
             case 1:
-                buscarInfo(viagens);
+                // buscarInfo(&viagens, &onibus);
                 break;
             case 2:
-                arrecadacoes(viagens);
+                // arrecadacoes(viagens);
                 break;
             case 3:
-                mediaIdade(viagens);
+                // mediaIdade(viagens);
                 break;
             case 4:
                 seta = 27;
