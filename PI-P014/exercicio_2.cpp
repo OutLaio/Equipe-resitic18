@@ -1,23 +1,27 @@
 #include <iostream>
 using namespace std;
 
-double celsiusParaFahrenheit(double temperaturaCelsius) {
-    return (temperaturaCelsius * 9.0 / 5.0) + 32.0;
-}
-
-void converterTemperatura() {
-    double temperaturaCelsius;
-    
-    cout << "Digite a temperatura em Celsius: ";
-    cin >> temperaturaCelsius;
-    
-    double temperaturaFahrenheit = celsiusParaFahrenheit(temperaturaCelsius);
-    
-    cout << "A temperatura em Fahrenheit eh: " << temperaturaFahrenheit << " F" << endl;
-}
+double celsiusFahrenheit(double temperaturaCelsius);
+void recebeTemp();
 
 int main() {
-    converterTemperatura();
-    
+
+    recebeTemp();
+
     return 0;
+}
+
+double celsiusFahrenheit(double temperaturaCelsius) {
+    return (temperaturaCelsius * 9.0 / 5.0) + 32.0;
+}
+void recebeTemp() {
+    double tempCelsius;
+    double tempFahrenheit;
+    
+    cout << "Digite a temperatura em Celsius (C): ";
+    cin >> tempCelsius;
+    
+    tempFahrenheit = celsiusFahrenheit(tempCelsius);
+    
+    cout << tempCelsius << "°C em Fahrenheit é: " << tempFahrenheit << "F" << endl;
 }

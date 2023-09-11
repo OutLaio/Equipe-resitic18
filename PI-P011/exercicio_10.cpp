@@ -1,36 +1,37 @@
-#include<iostream>
-#include<sstream>
-#include<string>
-#include<vector>
-#include<math.h>
-
+#include <iostream>
 using namespace std;
 
-int* contaLetra(string txt, char letra, int *qtde){
-    *qtde = 0;
-    int qtd = *qtde;
-    int *indice = (int*)malloc(qtd*sizeof(int));
-    for (int i = 0; i < txt.length(); i++){
-        if (txt[i] == letra){
-            (*qtde)++;
-            qtd = *qtde;
-            indice = (int*)realloc(indice, qtd*sizeof(int));
-            indice[*qtde-1] = i;
-        }
-    }
-    return indice;
-}
+void encontraLetra(char* str, char letra, int* &posicoes, int &tamanho);
 
-int main(){
-    string texto = "Ser ou nao ser, eis a questao!";
-    int qtde, *indice;
+int main() {
+    char* minhaString = "programacao";
+    char letraProcurada = 'a';
+    int* posicoes;
+    int tamanho = 0;
 
-    indice = contaLetra(texto, 'e', &qtde);
+    encontraLetra(minhaString, letraProcurada, posicoes, tamanho);
 
-    for (int i = 0; i < qtde; i++){
-        cout << indice[i] << " ";
-    }
+    if (tamanho > 0) {
+        cout << "A letra '" << letraProcurada << "' foi encontrada nas posições: ";
+        for (int i = 0; i < tamanho; i++) cout << posicoes[i] << " ";
+        cout << endl;
+
+    } else cout << "A letra '" << letraProcurada << "' não foi encontrada na string." << endl;
     
-    free(indice);
+    delete[] posicoes;
+
     return 0;
+}
+void encontraLetra(char* str, char letra, int*& posicoes, int& tamanho){
+    tamanho = 0;
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == letra) tamanho++;
+    }
+    posicoes = new int[tamanho];
+
+    int j = 0;
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == letra) posicoes[j++] = i;
+    }
 }

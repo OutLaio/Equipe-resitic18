@@ -1,44 +1,39 @@
-#include<iostream>
-#include<sstream>
-#include<string>
-#include<vector>
-#include<math.h>
-
+#include <iostream>
 using namespace std;
 
-int* intercala(int *vet1, int tam1, int *vet2, int tam2){
-    int qtd = tam1+tam2, q1 = 0, q2 = 0;
-    int *vetor = (int*)malloc(qtd * sizeof(int));
-
-    if (vetor == NULL) {
-        return NULL;
-    }
-
-    for (int i = 0; i < qtd;){
-        if(q1 < tam1){
-            vetor[i] = vet1[q1];
-            q1++;
-            i++;
-        }
-        if (q2 < tam2){
-            vetor[i] = vet2[q2];
-            q2++;
-            i++;
-        }
-    }
-    return vetor;
-}
-
+int* intercala(int *vet1, int tam1, int *vet2, int tam2);
 
 int main(){
-    int vet1[6] = {1,2,3,4,5,6}, vet2[10] = {1,2,3,4,5,6,7,8,9,10}, *vet;
 
-    vet = intercala(vet2, 10, vet1, 6);
+    int vetor1[5] = {10, 20, 30, 40, 50};
+    int vetor2[5] = {100, 200, 300, 400, 500};
+    int tam1 = 5, tam2 = 5;
+    int* vetorJuncao = intercala(vetor1, tam1, vetor2, tam2);
 
-    for (int i = 0; i < 16; i++){
-        cout << vet[i] << " ";
+    for(int i=0; i<tam1+tam2; i++){
+        cout << "- " << vetorJuncao[i] << endl;
     }
-    
-    free(vet);
+
     return 0;
+}
+
+int* intercala(int *vet1, int tam1, int *vet2, int tam2){
+    int* vetorTemp = new int[tam1 + tam2];
+    int x=0, y=0, z=0;
+    
+    while (x < tam1 && y < tam2) {
+        vetorTemp[z++] = vet1[x++];
+        vetorTemp[z++] = vet2[y++];
+    }
+    if(x < tam1){
+        while (x < tam1) {
+            vetorTemp[z++] = vet1[x++];
+        }
+    } else if(y < tam2){
+        while (y < tam2) {
+            vetorTemp[z++] = vet2[y++];
+        }
+    }
+
+    return vetorTemp;
 }

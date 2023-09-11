@@ -33,7 +33,22 @@ void adicionarContato(vector<Contato> *contatos) {
     return;
 }
 
+void removerContato(vector<Contato> *contatos){
+    string nomeDelete;
+    
+    system("cls");
+    cout << "Digite o nome do contato para deletar: ";
+    cin.ignore();
+    getline(cin, nomeDelete);
 
+    for(int i=0; i<contatos->size(); i++){
+        if(contatos->at(i).nome == nomeDelete){
+            contatos->erase(contatos->begin()+i);
+            cout << "Contato deletado com sucesso!" << endl;
+            return;
+        }
+    }
+}
 
 
 void dispMenu(int posicao){
@@ -83,7 +98,7 @@ void menuOpcoes(void){
                 adicionarContato(&contatos);
                 break;
             case 1:
-                // removerContato(&contatos);
+                removerContato(&contatos);
                 break;
             case 2:
                 // listarContatos(&contatos);

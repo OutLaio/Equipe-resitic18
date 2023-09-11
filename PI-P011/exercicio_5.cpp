@@ -1,32 +1,27 @@
-#include<iostream>
-#include<sstream>
-#include<string>
-#include<vector>
-#include<math.h>
-
+#include <iostream>
 using namespace std;
 
-int insere_meio( int *vetor, int qtde, int elemento){
-    int meio = qtde/2;
+int insere_meio(int *vetor, int qtde, int elemento);
 
-    for (int i = qtde; i > meio; i--){
+int main(){
+
+    int vetorInteiros[15] = {1, 2, 3, 4, 5, 6};
+    int quantidade = 6;
+    int elementoNovo = 100;
+
+    quantidade = insere_meio(vetorInteiros, quantidade, elementoNovo);
+
+    for(int i=0; i<quantidade; i++) cout << "Valor [" << i << "]: " << vetorInteiros[i] << endl; 
+
+    return 0;
+}
+int insere_meio(int *vetor, int qtde, int elemento){
+    int meio = int(qtde / 2);
+    
+    for (int i=qtde; i>meio; i--){
         vetor[i] = vetor[i-1];
     }
     vetor[meio] = elemento;
     qtde++;
-
     return qtde;
-}
-
-int main(){
-    int vetor[10] = {1,2,3,4,5,6}, qtde = 6;
-
-    qtde = insere_meio(vetor, qtde, 100);
-    
-    for (int i = 0; i < qtde; i++){
-        cout << vetor[i] << " ";
-    }
-    
-    
-    return 0;
 }
