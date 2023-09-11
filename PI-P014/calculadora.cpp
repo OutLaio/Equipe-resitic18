@@ -29,6 +29,14 @@ double multiplicacao(double num1, double num2){
     return num1 * num2;
 }
 
+double adicao(double num1, double num2){
+    return num1 + num2;
+
+}
+double subtracao(double num1, double num2){
+    return num1 - num2;
+}
+
 int main() {
     char operacao;
     double num1, num2;

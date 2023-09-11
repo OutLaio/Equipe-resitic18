@@ -50,6 +50,18 @@ void removerContato(vector<Contato> *contatos){
     }
 }
 
+void listarContatos(vector<Contato> *contatos){
+    if(contatos->size()>0){
+        cout << "Nome / telefone " << endl;
+        for(int i=0; i<contatos->size(); i++){
+            cout << contatos->at(i).nome << " / " << contatos->at(i).telefone << endl;
+        }
+    } else{
+        cout << "Não existe contato cadastrado " << endl;
+    }
+    
+    
+}
 
 void dispMenu(int posicao){
     system("cls");
@@ -101,7 +113,7 @@ void menuOpcoes(void){
                 removerContato(&contatos);
                 break;
             case 2:
-                // listarContatos(&contatos);
+                 listarContatos(&contatos);
                 break;
             case 3:
                 seta = 27;
