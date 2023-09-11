@@ -1,0 +1,3 @@
+Resposta:
+    A coesão tem a ver com as variáveis maximo e minimo serem dependentes do vetor e seus valores. Assim como a variável 'n' que carrega consigo o tamanho do vetor tornando possivel percorrer o mesmo.
+    Sobre o acoplamento, a função não utiliza ou depende de qualquer variável externa, sendo necessário somente as variáveis passadas por parâmetro.
