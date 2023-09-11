@@ -50,6 +50,7 @@ void removerContato(vector<Contato> *contatos){
     }
 }
 
+
 void dispMenu(int posicao){
     system("cls");
     cout << "======= Agenda Simples =======" << endl << endl;
