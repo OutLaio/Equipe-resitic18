@@ -134,7 +134,7 @@ void excluirProduto(){
         cout << "== EXCLUIR UM PRODUTO ==" << endl;
         cout << "Digite o código: ";
         cin >> codigoExcluir;
-
+        
         for(size_t i=0; i<produtosMercado.size(); i++){
             if(produtosMercado.at(i).codigo == codigoExcluir){
                 codigoEncontrado = true;
@@ -144,7 +144,10 @@ void excluirProduto(){
         if(codigoEncontrado){
             cout << endl << "Produto excluido com sucesso!" << endl;
             pause();
-        } else cout << endl << "Produto não encontrado! Verifique se digitou o código corretamente." << endl;
+        } else{
+            cout << endl << "Produto não encontrado! Verifique se digitou o código corretamente." << endl;
+            pause();
+        }
     } else {
         cout << "Nenhum produto cadastrado!" << endl;
         pause();
