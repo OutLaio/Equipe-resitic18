@@ -1,8 +1,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
+
 
 class Produto {
+private:
+    int codigo;
+    std::string nome;
+    double preco;
+
 public:
     Produto(int codigo, const std::string& nome, double preco)
         : codigo(codigo), nome(nome), preco(preco) {}
@@ -10,18 +17,13 @@ public:
     int getCodigo() const { return codigo; }
     std::string getNome() const { return nome; }
     double getPreco() const { return preco; }
-
-private:
-    int codigo;
-    std::string nome;
-    double preco;
 };
 
 class Estoque {
 
 private:
-    vector<Produto> estoque;
-
+    std::map<int, int> estoque; // Mapeia o código do produto para a quantidade em estoque    
+    
 public:
     void adicionarProduto(const Produto& produto, int quantidade) {
         estoque[produto.getCodigo()] += quantidade;
@@ -42,10 +44,13 @@ public:
         }
         return 0;
     }
-
 };
 
 class CarrinhoDeCompras {
+
+private:
+    std::vector<std::pair<Produto, int>> carrinho;
+
 public:
     void adicionarProduto(const Produto& produto, int quantidade) {
         carrinho.push_back(std::make_pair(produto, quantidade));
@@ -78,19 +83,16 @@ public:
         std::cout << "Carrinho de Compras:\n";
         for (const auto& item : carrinho) {
             std::cout << "Produto: " << item.first.getNome()
-                      << " | Preço unitário: " << item.first.getPreco()
+                      << " | Preco unitario: " << item.first.getPreco()
                       << " | Quantidade: " << item.second << "\n";
         }
         std::cout << "Valor Total: " << calcularValorTotal() << "\n";
     }
-
-private:
-    std::vector<std::pair<Produto, int>> carrinho;
 };
 
 int main() {
     Produto p1(1, "Arroz", 5.99);
-    Produto p2(2, "Feijão", 3.99);
+    Produto p2(2, "Feijao", 3.99);
 
     Estoque estoque;
     estoque.adicionarProduto(p1, 50);
