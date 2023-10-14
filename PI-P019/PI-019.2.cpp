@@ -1,5 +1,9 @@
 #include <iostream>
 #include <set>
+#include <map>
+#include <string>
+#include <vector>
+
 
 class Conjunto {
 private:
@@ -8,7 +12,6 @@ private:
 public:
     // Construtor que aceita outro conjunto como parâmetro
     Conjunto(const std::set<int>& outrosElementos) : elementos(outrosElementos) {}
-    Conjunto resultado();
 
     // Sobrecarga do operador de atribuição (=)
     Conjunto& operator=(const Conjunto& outro) {
@@ -29,7 +32,7 @@ public:
 
     // Sobrecarga do operador de intersecção (*)
     Conjunto operator*(const Conjunto& outro) const {
-        Conjunto resultado();
+        Conjunto resultado;
         for (int elemento : this->elementos) {
             if (outro.elementos.count(elemento) > 0) {
                 resultado.elementos.insert(elemento);
