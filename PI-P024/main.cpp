@@ -1,3 +1,9 @@
+/**
+ * A estratégia usada foi associação, as classes estão relacionadas mas não são
+ * agregadas umas às outras. Elas existem independentemente e são usadas em conjunto
+ * para construir a funcionalidade do sistema.
+*/
+
 #include <iostream>
 #include <vector>
 #include <fstream>
