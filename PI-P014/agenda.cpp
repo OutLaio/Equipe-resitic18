@@ -2,7 +2,7 @@
 #include<sstream>
 #include<string>
 #include<vector>
-#include<conio.h>
+//#include<conio.h>
 #include<math.h>
 
 using namespace std;
@@ -41,7 +41,7 @@ void removerContato(vector<Contato> *contatos){
     cin.ignore();
     getline(cin, nomeDelete);
 
-    for(int i=0; i<contatos->size(); i++){
+    for(size_t i=0; i<contatos->size(); i++){
         if(contatos->at(i).nome == nomeDelete){
             contatos->erase(contatos->begin()+i);
             cout << "Contato deletado com sucesso!" << endl;
@@ -102,7 +102,7 @@ void menuOpcoes(void){
             posicao=3;
 
         dispMenu(posicao);
-        seta = _getch();
+        //seta = _getch();
 
         if(seta == 13){
             switch (posicao){

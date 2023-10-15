@@ -52,8 +52,9 @@ void tabelaEstudantes();
 /**
  * @brief Função para ordenar lexicográficamente lista de nomes.
  * @param nomes Vector<string> com nomes dos estudantes.
+ * @param notas Vector<string> com as notas dos estudantes.
 */
-void ordenaAbc(vector<string> &nomes);
+void ordenaAbc(vector<string> &nomes, vector<float> &notas);
 /**
  * @brief Função para encontrar o maior nome entre os estudantes para ajustar a tabela.
 */
@@ -249,7 +250,7 @@ void tabelaEstudantes(){
     system(CLEAR_SCREEN);
 
     if(alteracao){
-        ordenaAbc(nomesEstudantes);
+        ordenaAbc(nomesEstudantes, notasEstudantes);
         procuraMaiorNome();
     }
     alteracao = false;
@@ -269,7 +270,7 @@ void tabelaEstudantes(){
         contador += 2;
     }
 }
-void ordenaAbc(vector<string> &nomes){
+void ordenaAbc(vector<string> &nomes, vector<float> &notas){
     int n = nomes.size() - 1;
     int contador = 0;
     bool trocou;
@@ -282,6 +283,8 @@ void ordenaAbc(vector<string> &nomes){
             
             if(tolower(nomes.at(i).at(contador)) > tolower(nomes.at(i+1).at(contador))){
                 swap(nomes.at(i), nomes.at(i+1));
+                swap(notas.at(i*2), notas.at((i+1)*2));
+                swap(notas.at(i*2+1), notas.at((i+1)*2+1));
                 trocou = true;
             }
         }
