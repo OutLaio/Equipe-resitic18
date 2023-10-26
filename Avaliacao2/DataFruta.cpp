@@ -241,7 +241,7 @@ class ListaSalarios : public Lista {
 		if(lista.size() > 0){
 			cout << "Mediana dos salarios: ";
 			if(lista.size() % 2 == 0){
-				cout << lista[(lista.size() / 2) - 1] << endl;
+				cout << ((lista[(lista.size() / 2) - 1] + lista[(lista.size() / 2)]) / 2) << endl;
 			} else cout << lista[lista.size() / 2] << endl;
 		}
 	}
@@ -301,7 +301,7 @@ class ListaIdades : public Lista {
 		if(lista.size() > 0){
 			cout << "Mediana das idades: ";
 			if(lista.size() % 2 == 0){
-				cout << lista[(lista.size() / 2) - 1] << endl;
+				cout << (lista[(lista.size() / 2) - 1] + lista[(lista.size() / 2)]) / 2 << endl;
 			} else cout << lista[lista.size() / 2] << endl;
 		}
 	}
