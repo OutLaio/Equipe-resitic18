@@ -41,11 +41,19 @@ class Data {
 		return 0; // SE FOR IGUAIS
 	}
 	static void ordenaDatas(vector<Data> *lista){
-		for(size_t i=0; i<lista->size() - 1; i++){
-			if(Data::compara((*lista)[i], (*lista)[i+1]) == 1){
-				swap((*lista)[i], (*lista)[i+1]);
+		bool flag;
+		int c = 1;
+		do{
+			flag = false;
+			for(size_t i=0; i<lista->size() - c; i++){
+				if(Data::compara((*lista)[i], (*lista)[i+1]) == 1){
+					swap((*lista)[i], (*lista)[i+1]);
+					flag = true;
+				}
 			}
-		}
+			c++;
+		} while (flag);
+		
 	}
 	void setDia(int _dia){
 		this->dia = _dia;
@@ -75,8 +83,8 @@ class Lista {
 	virtual void mostraMediana() = 0;
 	virtual void mostraMenor() = 0;
 	virtual void mostraMaior() = 0;
-  virtual void listarEmOrdem() = 0;
-  virtual void listarLimite(size_t) = 0;
+  	virtual void listarEmOrdem() = 0;
+  	virtual void listarLimite(size_t) = 0;
 };
 class ListaNomes : public Lista {
 	vector<string> lista;
@@ -132,9 +140,10 @@ class ListaNomes : public Lista {
 	 * @brief O metodo abaixo exibe a lista em ordem alfabetica.
 	*/
   void listarEmOrdem(){
-    for(size_t i=0; i<lista.size(); i++){
-      cout << lista[i] << endl;
-    }
+		cout << "Lista completa:" << endl;
+		for(size_t i=0; i<lista.size(); i++){
+		cout << lista[i] << endl;
+		}
   }
   /**
   * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem alfabetica.
@@ -182,7 +191,7 @@ class ListaDatas : public Lista {
 			lista.push_back(novaData);
 		}
 		Data::ordenaDatas(&lista);
-		system("clear");
+		system("clear||cls");
 	}
 	/**
 	 * @brief O metodo abaixo exibe a mediana da lista de datas
@@ -215,9 +224,10 @@ class ListaDatas : public Lista {
 	 * @brief O metodo abaixo exibe a lista em ordem cronológica.
 	*/
     void listarEmOrdem(){
-        for(size_t i=0; i<lista.size(); i++){
-            cout << lista[i].toString() << endl;
-        }
+			cout << "Lista completa:" << endl;
+			for(size_t i=0; i<lista.size(); i++){
+				cout << lista[i].toString() << endl;
+			}
     }
   /**
   * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem cronológica.
@@ -289,9 +299,10 @@ class ListaSalarios : public Lista {
   * @brief O metodo abaixo exibe a lista em ordem crescente.
   */
   void listarEmOrdem(){
-      for(size_t i=0; i<lista.size(); i++){
-          cout << lista[i] << endl;
-      }
+		cout << "Lista completa:" << endl;
+		for(size_t i=0; i<lista.size(); i++){
+			cout << lista[i] << endl;
+		}
   }
   /**
   * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem crescente.
@@ -361,9 +372,10 @@ class ListaIdades : public Lista {
   * @brief O metodo abaixo exibe a lista em ordem crescente.
   */
   void listarEmOrdem(){
-      for(size_t i=0; i<lista.size(); i++){
-          cout << lista[i] << endl;
-      }
+		cout << "Lista completa:" << endl;
+		for(size_t i=0; i<lista.size(); i++){
+			cout << lista[i] << endl;
+		}
   }
   /**
   * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem crescente.
@@ -401,8 +413,6 @@ int main () {
 	listaDeListas.push_back(&listaIdades);
 	
 	for (Lista* l : listaDeListas) {
-		l->mostraMediana();
-		l->mostraMenor();
-		l->mostraMaior();
+		l->listarEmOrdem();
 	}
 }
