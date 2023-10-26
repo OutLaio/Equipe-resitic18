@@ -1,30 +1,26 @@
 #include <iostream>
-
 using namespace std;
 
-unsigned long long calcularFatorial(int numero) {
-    if (numero < 0) {
-        cout << "Fatorial não está definido para números negativos." << endl;
-        return 0;
-    }
-    
-    unsigned long long resultado = 1;
-    
-    for (int i = 1; i <= numero; i++) {
-        resultado *= i;
-    }
-    
-    return resultado;
-}
+int fatorial(int num);
 
-int main() {
-    int numero1 = 5; 
-    int numero2 = 10; 
-    int numero3 = 0; 
-    
-    cout << "Fatorial de " << numero1 << ": " << calcularFatorial(numero1) << endl;
-    cout << "Fatorial de " << numero2 << ": " << calcularFatorial(numero2) << endl;
-    cout << "Fatorial de " << numero3 << ": " << calcularFatorial(numero3) << endl;
-    
+int main(){
+
+    int a = 6;
+    int b = 9;
+    int c = 11;
+
+    cout << "Fatorial de 6: " << fatorial(a) << endl;
+    cout << "Fatorial de 9: " << fatorial(b) << endl;
+    cout << "Fatorial de 11: " << fatorial(c) << endl;
+
     return 0;
+}
+int fatorial(int num){
+    int soma = 1;
+
+    if(num < 0) return 0;
+    
+    for(int i=1; i<=num; i++) soma *= i;
+
+    return soma;
 }

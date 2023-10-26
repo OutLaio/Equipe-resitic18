@@ -1,44 +1,47 @@
-#include<iostream>
-#include<sstream>
-#include<string>
-#include<vector>
-#include<math.h>
-
+#include <iostream>
 using namespace std;
 
-void ordena(float* a, float* b, float* c, float* d){
-    bool trocou;
-    do{
-        trocou = false;
-        if(*a > *b){
-            *a += *b;
-            *b = *a - *b;
-            *a -= *b;
-            trocou = true;
-        }
-        if(*b > *c){
-            *b += *c;
-            *c = *b - *c;
-            *b -= *c;
-            trocou = true;
-        }
-        if(*c > *d){
-            *c += *d;
-            *d = *c - *d;
-            *c -= *d;
-            trocou = true;
-        }
-    }while(trocou);
-}
+void ordenaFloat(float &var1, float &var2, float &var3, float &var4);
 
 int main(){
-    float a = 9, b = 8, c = 3, d = 1;
-    
-    cout << a << " " << b << " " << c << " " << d << endl;
 
-    ordena(&a, &b, &c, &d);
+    float n1, n2, n3, n4;
 
-    cout << a << " " << b << " " << c << " " << d << endl;
-    
+    cout << "Digite os valores [x y z w]: ";
+    cin >> n1 >> n2 >> n3 >> n4;
+
+    cout << "Valores antigos" << endl;
+    cout << "N1: " << n1 << endl;
+    cout << "N2: " << n2 << endl;
+    cout << "N3: " << n3 << endl;
+    cout << "N4: " << n4 << endl;
+
+    ordenaFloat(n1, n2, n3, n4);
+
+    cout << endl << "Valores novos" << endl;
+    cout << "N1: " << n1 << endl;
+    cout << "N2: " << n2 << endl;
+    cout << "N3: " << n3 << endl;
+    cout << "N4: " << n4 << endl;
+
     return 0;
+}
+void ordenaFloat(float &var1, float &var2, float &var3, float &var4){
+    float vetorFloats[4] = {var1, var2, var3, var4};
+    bool troca;
+
+    do {
+        troca = false;
+        for (int i = 0; i < 4; i++) {
+            if (vetorFloats[i] > vetorFloats[i + 1]) {
+                swap(vetorFloats[i], vetorFloats[i+1]);
+                troca = true;
+            }
+        }
+    } while (troca);
+
+    var1 = vetorFloats[0];
+    var2 = vetorFloats[1];
+    var3 = vetorFloats[2];
+    var4 = vetorFloats[3];
 }

@@ -14,6 +14,12 @@ class Data {
 		ano = _ano;
 	}
 	Data(){}
+	Data (int _dia, int _mes, int _ano) {
+		dia = _dia;
+		mes = _mes;
+		ano = _ano;
+	}
+	Data(){}
 	/*
 	O metodo abaixo retornara -1 se d1 eh anterior a d2
 	Retornara 0 se d1 = d2
@@ -99,14 +105,14 @@ class ListaNomes : public Lista {
 		cout << "> ";
 		cin >> qntNomes;
 		cin.ignore();
-		system("clear||cls");
+		system("clear");
 		for(int i = 0; i < qntNomes; i++){
 			string nome;
 			cout << i+1 << "º nome: ";
 			getline(cin, nome);
 			lista.push_back(nome);
 		}
-		system("clear||cls");
+		system("clear");
 		sort(lista.begin(), lista.end());
 	}
 	/**
@@ -174,7 +180,7 @@ class ListaDatas : public Lista {
 		cout << "> ";
 		cin >> qntDatas;
 		cin.ignore();
-		system("clear||cls");
+		system("clear");
 		for(int i = 0; i < qntDatas; i++){
 			Data novaData;
 			int d, m, a;
@@ -260,14 +266,14 @@ class ListaSalarios : public Lista {
 		cout << "> ";
 		cin >> qntSalarios;
 		cin.ignore();
-		system("clear||cls");
+		system("clear");
 		for(int i = 0; i < qntSalarios; i++){
 			float salario;
 			cout << i+1 << "º Salario: ";
 			cin >> salario;
 			lista.push_back(salario);
 		}
-		system("clear||cls");
+		system("clear");
 		sort(lista.begin(), lista.end());
 	}		
 	/**
@@ -333,14 +339,14 @@ class ListaIdades : public Lista {
 		cout << "> ";
 		cin >> qntIdades;
 		cin.ignore();
-		system("clear||cls");
+		system("clear");
 		for(int i = 0; i < qntIdades; i++){
 			int idade;
 			cout << i+1 << "º Idade: ";
 			cin >> idade;
 			lista.push_back(idade);
 		}
-		system("clear||cls");
+		system("clear");
 		sort(lista.begin(), lista.end());
 	}
 	/**
