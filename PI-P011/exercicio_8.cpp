@@ -1,29 +1,35 @@
-#include<iostream>
-#include<sstream>
-#include<string>
-#include<vector>
-#include<math.h>
-
+#include <iostream>
 using namespace std;
 
-int conta_primos (int *vet, int qtde){
-    int qtdPrimo = qtde;
-
-    for (int i = 0; i < qtde; i++){
-        for (int j = 2; j*j <= vet[i]; j++){
-            if (vet[i]%j == 0){
-                qtdPrimo--;
-                break;
-            }
-        }
-    }
-    return qtdPrimo;
-}
+int conta_primos(int *vet, int qtde);
+bool primo(int x);
 
 int main(){
-    int vet[10] = {2,4,6,3,73,97,10,35,63,49};
-    
-    cout << conta_primos(vet, 10) << endl;
-    
+
+    int vetorInteiros[5] = {1, 2, 3, 4, 5};
+    int qnt = 5;
+
+    cout << "quantidade de primos: " << conta_primos(vetorInteiros, qnt) << endl;
+
     return 0;
+}
+int conta_primos(int *vet, int qtde){
+    int contador = 0;
+
+    for(int i=0; i<qtde; i++){
+        if(primo(vet[i])) contador++;
+    }
+    return contador;
+}
+bool primo(int x){
+    if (x <= 1) return false;
+    else if (x <= 3) return true;
+    else if (x % 2 == 0 || x % 3 == 0) return false;
+
+    for (int divisor = 5; divisor * divisor <= x; divisor += 6) {
+        if (x % divisor == 0 || x % (divisor + 2) == 0) {
+            return false;
+        }
+    }
+    return true;
 }

@@ -1,22 +1,24 @@
-#include<iostream>
-#include<sstream>
-#include<string>
-#include<vector>
-#include<math.h>
-
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
-float calc_serie(int N){
-    float serie = 0.0;
-    for (float i = 0.0; i < N; i += 1.0){
-        serie += (i+1)/(N-i);
-    }
-    return serie;
-}
+float calc_serie(int N);
 
 int main(){
-    
-    cout << calc_serie(5) << endl;
-    
+
+    int numero = 10;
+
+    cout << "SOMA: " << calc_serie(numero) << endl;
+
     return 0;
+}
+float calc_serie(int N){
+    float soma;
+    int maximo = N;
+
+    for(int i=1; i<=N; i++){
+        soma += (float) i / (float) maximo;
+    }
+    return soma;
+
 }

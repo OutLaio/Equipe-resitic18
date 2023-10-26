@@ -1,45 +1,67 @@
 #include <iostream>
-#include <string>
-
+#include <vector>
 using namespace std;
 
-const int MAX_EMPREGADOS = 50;
-
-typedef struct T_empregado {
+struct EMPREGADO {
     string nome;
     string sobrenome;
-    int anoNascimento;
-    string RG;
-    int anoAdmissao;
+    string anoNascimento;
+    string Rg;
+    string anoAdmissao;
     double salario;
-} Empregado;
+};
 
-void Reajusta_dez_porcento(Empregado empregados[], int numEmpregados) {
-    for (int i = 0; i < numEmpregados; i++) {
-        empregados[i].salario *= 1.10;
+vector<EMPREGADO> empregados;
+size_t quantidadeMaxima = 50;
+
+void reajusta_dez_porcent(){
+    for(size_t i=0; i<empregados.size(); i++){
+        empregados.at(i).salario += empregados.at(i).salario * 0.10;
+    }
+}
+void cadastraEmpregado(){
+    system("clear");
+    if(empregados.size() < quantidadeMaxima){
+        EMPREGADO e;
+        cout << "Digite o primeiro nome: ";
+        cin >> e.nome;
+        cout << "Digite o ultimo sobrenome: ";
+        cin >> e.sobrenome;
+        cout << "Digite a data de nascimento: ";
+        cin >> e.anoNascimento;
+        cout << "Digite seu RG: ";
+        cin >> e.Rg;
+        cout << "Digite o ano de Admissão: ";
+        cin >> e.anoAdmissao;
+        cout << "Digite seu salario (ex: 2560.00): ";
+        cin >> e.salario;
+        empregados.push_back(e);
+        cout << endl << "Empregado cadastrado!" << endl << endl;
+    } else cout << "Limite máximo de empregados atingidos" << endl;
+}
+void exibeEmpregados(){
+    cout << "NOME\t\t\t" << "NOVO SALÁRIO" << endl;
+    for(EMPREGADO e : empregados){
+        cout << e.nome << " " << e.sobrenome;
+        if((e.nome.length() + e.sobrenome.length()) < 10) cout << "\t\t\t";
+        else if((e.nome.length() + e.sobrenome.length()) < 15) cout << "\t\t";
+        else cout << "\t";
+        cout << e.salario << endl;
     }
 }
 
-int main() {
-    Empregado empregados[MAX_EMPREGADOS];
-    int numEmpregados;
+int main(){
 
-    numEmpregados = 3;
-    empregados[0] = {"Laio", "Rodrigues", 1980, "123456789", 2010, 3000.0};
-    empregados[1] = {"Joao", "Ramos", 1995, "987654321", 2015, 2500.0};
-    empregados[2] = {"Vitor", "Sousa", 1985, "555555555", 2009, 3500.0};
+    cadastraEmpregado();
+    cadastraEmpregado();
 
-    Reajusta_dez_porcento(empregados, numEmpregados);
+    cout << endl << "Antes do reajuste:" << endl;
+    exibeEmpregados();
 
-    cout << "Empregados apos o reajuste de 10%:" << endl;
-    for (int i = 0; i < numEmpregados; i++) {
-        cout << "Nome: " << empregados[i].nome << " " << empregados[i].sobrenome << endl;
-        cout << "Ano de Nascimento: " << empregados[i].anoNascimento << endl;
-        cout << "RG: " << empregados[i].RG << endl;
-        cout << "Ano de Admissao: " << empregados[i].anoAdmissao << endl;
-        cout << "Salario: R$" << empregados[i].salario << endl;
-        cout << "-------------------------" << endl;
-    }
+    reajusta_dez_porcent();
+
+    cout << endl << "Após o reajuste: " << endl;
+    exibeEmpregados();
 
     return 0;
 }

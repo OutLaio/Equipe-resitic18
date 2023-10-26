@@ -1,51 +1,39 @@
-#include<iostream>
-#include<sstream>
-#include<string>
-#include<vector>
-#include<math.h>
-
+#include <iostream>
+#include <string>
 using namespace std;
 
-string codificaString(const string &texto) {
-    string codificada = texto;
-
-    for (size_t i = 0; i < codificada.length(); i++) {
-        if (isalpha(codificada[i])) { 
-            if (codificada[i] == 'z')
-                codificada[i] = 'a'; 
-            else if (codificada[i] == 'Z')
-                codificada[i] = 'A';
-            else
-                codificada[i]++;
-        }
-    }
-    return codificada;
-}
-
-string decodificaString(const string &textoCodificado) {
-    string decodificada = textoCodificado;
-
-    for (size_t i = 0; i < decodificada.length(); i++) {
-        if (isalpha(decodificada[i])) {
-            if (decodificada[i] == 'a')
-                decodificada[i] = 'z';
-            else if (decodificada[i] == 'A')
-                decodificada[i] = 'Z';
-            else
-                decodificada[i]--;
-        }
-    }
-    return decodificada;
-}
+string codificarString(string &entrada);
+string decodificarString(string &entrada);
 
 int main() {
-    string texto = "Estruturas de Dados";
-    string textoCodificado = codificaString(texto);
-    string textoDecodificado = decodificaString(textoCodificado);
+    string msgOriginal = "Estruturas de Dados";
+    string msgCodificada = codificarString(msgOriginal);
+    string msgDecodificada = decodificarString(msgCodificada);
 
-    cout << "Texto Original: " << texto << endl
-         << "Texto Codificado: " << textoCodificado << endl
-         << "Texto Decodificado: " << textoDecodificado << endl;
-
+    cout << "Mensagem Original: " << msgOriginal << endl;
+    cout << "Mensagem Codificada: " << msgCodificada << endl;
+    cout << "Mensagem Decodificada: " << msgDecodificada << endl;
     return 0;
+}
+string codificarString(string &entrada) {
+    string resultado = entrada;
+
+    for (char &c : resultado) {
+        if (isalpha(c)) {
+            if (c == 'z' || c == 'Z') c = c - 25;
+            else c++;
+        }
+    }
+    return resultado;
+}
+string decodificarString(string &entrada) {
+    string resultado = entrada;
+
+    for(char &c : resultado) {
+        if (isalpha(c)) {
+            if (c == 'a' || c == 'A') c = c + 25;
+            else c--;
+        }
+    }
+    return resultado;
 }

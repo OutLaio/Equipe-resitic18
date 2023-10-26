@@ -2,7 +2,7 @@
 #include<sstream>
 #include<string>
 #include<vector>
-#include<conio.h>
+//#include<conio.h>
 #include<math.h>
 
 using namespace std;
@@ -33,8 +33,35 @@ void adicionarContato(vector<Contato> *contatos) {
     return;
 }
 
+void removerContato(vector<Contato> *contatos){
+    string nomeDelete;
+    
+    system("cls");
+    cout << "Digite o nome do contato para deletar: ";
+    cin.ignore();
+    getline(cin, nomeDelete);
 
+    for(size_t i=0; i<contatos->size(); i++){
+        if(contatos->at(i).nome == nomeDelete){
+            contatos->erase(contatos->begin()+i);
+            cout << "Contato deletado com sucesso!" << endl;
+            return;
+        }
+    }
+}
 
+void listarContatos(vector<Contato> *contatos){
+    if(contatos->size()>0){
+        cout << "Nome / telefone " << endl;
+        for(int i=0; i<contatos->size(); i++){
+            cout << contatos->at(i).nome << " / " << contatos->at(i).telefone << endl;
+        }
+    } else{
+        cout << "Não existe contato cadastrado " << endl;
+    }
+    
+    
+}
 
 void dispMenu(int posicao){
     system("cls");
@@ -75,7 +102,7 @@ void menuOpcoes(void){
             posicao=3;
 
         dispMenu(posicao);
-        seta = _getch();
+        //seta = _getch();
 
         if(seta == 13){
             switch (posicao){
@@ -83,10 +110,10 @@ void menuOpcoes(void){
                 adicionarContato(&contatos);
                 break;
             case 1:
-                // removerContato(&contatos);
+                removerContato(&contatos);
                 break;
             case 2:
-                // listarContatos(&contatos);
+                 listarContatos(&contatos);
                 break;
             case 3:
                 seta = 27;

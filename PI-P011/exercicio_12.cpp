@@ -1,32 +1,23 @@
-#include<iostream>
-#include<sstream>
-#include<string>
-#include<vector>
-#include<math.h>
-
+#include <iostream>
 using namespace std;
 
-string intersecao(const string &A, const string &B) {
-    string resultado;
-    
-    for (size_t i = 0; i < A.length(); i++){
-        for (size_t j = 0; j < B.length(); j++){
-            if(B[j] == A[i]){
-                resultado.push_back(B[j]);
-            }
-        }
-    }
-
-    return resultado;
-}
+string caracComum(string p1, string p2);
 
 int main() {
-    string A = "abcdef";
-    string B = "defghijk";
+    string palavra1 = "jklmno";
+    string palavra2 = "mnopqrstu";
 
-    string C = intersecao(A, B);
-
-    cout << "Intersecao das strings A e B: " << C << endl;
+    cout << "Caracteres comum: " << caracComum(palavra1, palavra2) << endl;
 
     return 0;
+}
+string caracComum(string p1, string p2) {
+    string comums = "";
+    
+    for (size_t i = 0; i < p1.length(); i++){
+        for (size_t j = 0; j < p2.length(); j++){
+            if(p2[j] == p1[i]) comums.push_back(p2[j]);
+        }
+    }
+    return comums;
 }

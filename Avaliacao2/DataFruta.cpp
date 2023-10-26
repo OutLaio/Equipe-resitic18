@@ -8,6 +8,12 @@ using namespace std;
 class Data {
 	int dia, mes, ano;
 	public:
+	Data (int _dia, int _mes, int _ano) {
+		dia = _dia;
+		mes = _mes;
+		ano = _ano;
+	}
+	Data(){}
 	/*
 	O metodo abaixo retornara -1 se d1 eh anterior a d2
 	Retornara 0 se d1 = d2
@@ -34,12 +40,13 @@ class Data {
 
 		return 0; // SE FOR IGUAIS
 	}
-	Data (int _dia, int _mes, int _ano) {
-		dia = _dia;
-		mes = _mes;
-		ano = _ano;
+	static void ordenaDatas(vector<Data> *lista){
+		for(size_t i=0; i<lista->size() - 1; i++){
+			if(Data::compara((*lista)[i], (*lista)[i+1]) == 1){
+				swap((*lista)[i], (*lista)[i+1]);
+			}
+		}
 	}
-	Data(){}
 	void setDia(int _dia){
 		this->dia = _dia;
 	}
@@ -68,8 +75,8 @@ class Lista {
 	virtual void mostraMediana() = 0;
 	virtual void mostraMenor() = 0;
 	virtual void mostraMaior() = 0;
-    virtual void listarEmOrdem() = 0;
-    virtual void listarLimite(size_t) = 0;
+  virtual void listarEmOrdem() = 0;
+  virtual void listarLimite(size_t) = 0;
 };
 class ListaNomes : public Lista {
 	vector<string> lista;
@@ -84,14 +91,14 @@ class ListaNomes : public Lista {
 		cout << "> ";
 		cin >> qntNomes;
 		cin.ignore();
-		system("clear||cls");
+		system("clear");
 		for(int i = 0; i < qntNomes; i++){
 			string nome;
 			cout << i+1 << "º nome: ";
 			getline(cin, nome);
 			lista.push_back(nome);
 		}
-		system("clear||cls");
+		system("clear");
 		sort(lista.begin(), lista.end());
 	}
 	/**
@@ -121,29 +128,29 @@ class ListaNomes : public Lista {
 		if(lista.size() > 0) cout << "Último nome: " << lista[lista.size()-1] << endl;
 		else cout << "Nenhum nome inserido" << endl;
 	}
-    /**
+	/**
 	 * @brief O metodo abaixo exibe a lista em ordem alfabetica.
 	*/
-    void listarEmOrdem(){
-        for(size_t i=0; i<lista.size(); i++){
-            cout << lista[i] << endl;
-        }
+  void listarEmOrdem(){
+    for(size_t i=0; i<lista.size(); i++){
+      cout << lista[i] << endl;
     }
-    /**
-	 * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem alfabetica.
-	*/
-    void listarLimite(size_t n){
-        if(lista.size()==0){
-            cout << "A lista de nomes esta vazia!" << endl;
-            return;
-        }
-        if(lista.size() < n)
-            n = lista.size();
-        
-        for(size_t i=0; i<n; i++){
-            cout << lista[i] << endl;
-        }
+  }
+  /**
+  * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem alfabetica.
+  */
+  void listarLimite(size_t n){
+    if(lista.size()==0){
+      cout << "A lista de nomes esta vazia!" << endl;
+      return;
     }
+    if(lista.size() < n)
+      n = lista.size();
+
+    for(size_t i=0; i<n; i++){
+      cout << lista[i] << endl;
+    }
+  }
 };
 class ListaDatas : public Lista {
 	vector<Data> lista;
@@ -158,7 +165,7 @@ class ListaDatas : public Lista {
 		cout << "> ";
 		cin >> qntDatas;
 		cin.ignore();
-		system("clear||cls");
+		system("clear");
 		for(int i = 0; i < qntDatas; i++){
 			Data novaData;
 			int d, m, a;
@@ -174,8 +181,8 @@ class ListaDatas : public Lista {
 			novaData.setAno(a);
 			lista.push_back(novaData);
 		}
-		//sort(lista.begin(), lista.end(), Data::compara);
-		system("clear||cls");
+		Data::ordenaDatas(&lista);
+		system("clear");
 	}
 	/**
 	 * @brief O metodo abaixo exibe a mediana da lista de datas
@@ -194,17 +201,17 @@ class ListaDatas : public Lista {
 	 * @brief O metodo abaixo exibe a menor data da lista
 	*/
 	void mostraMenor() {
-		if(lista.size() > 0) cout << "Primeira data: " << lista[0].toString() << endl;
+		if(lista.size() > 0) cout << "Primeira data: " << lista[lista.size() - 1].toString() << endl;
 		else cout << "Nenhuma data inserida" << endl;
 	}
 	/**
 	 * @brief O metodo abaixo exibe a maior data da lista
 	*/
 	void mostraMaior() {
-		if(lista.size() > 0) cout << "Ultima data: " << lista[lista.size() - 1].toString() << endl;
+		if(lista.size() > 0) cout << "Ultima data: " << lista[0].toString() << endl;
 		else cout << "Nenhuma data inserida" << endl;
 	}
-    /**
+	/**
 	 * @brief O metodo abaixo exibe a lista em ordem cronológica.
 	*/
     void listarEmOrdem(){
@@ -212,21 +219,21 @@ class ListaDatas : public Lista {
             cout << lista[i].toString() << endl;
         }
     }
-    /**
-	 * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem cronológica.
-	*/
-    void listarLimite(size_t n){
-        if(lista.size()==0){
-            cout << "A lista de datas esta vazia!" << endl;
-            return;
-        }
-        if(lista.size() < n)
-            n = lista.size();
-        
-        for(size_t i=0; i<n; i++){
-            cout << lista[i].toString() << endl;
-        }
-    }
+  /**
+  * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem cronológica.
+  */
+  void listarLimite(size_t n){
+      if(lista.size()==0){
+          cout << "A lista de datas esta vazia!" << endl;
+          return;
+      }
+      if(lista.size() < n)
+          n = lista.size();
+
+      for(size_t i=0; i<n; i++){
+          cout << lista[i].toString() << endl;
+      }
+  }
 };
 class ListaSalarios : public Lista {
 	vector<float> lista;
@@ -243,14 +250,14 @@ class ListaSalarios : public Lista {
 		cout << "> ";
 		cin >> qntSalarios;
 		cin.ignore();
-		system("clear||cls");
+		system("clear");
 		for(int i = 0; i < qntSalarios; i++){
 			float salario;
 			cout << i+1 << "º Salario: ";
 			cin >> salario;
 			lista.push_back(salario);
 		}
-		system("clear||cls");
+		system("clear");
 		sort(lista.begin(), lista.end());
 	}		
 	/**
@@ -260,7 +267,7 @@ class ListaSalarios : public Lista {
 		if(lista.size() > 0){
 			cout << "Mediana dos salarios: ";
 			if(lista.size() % 2 == 0){
-				cout << lista[(lista.size() / 2) - 1] << endl;
+				cout << ((lista[(lista.size() / 2) - 1] + lista[(lista.size() / 2)]) / 2) << endl;
 			} else cout << lista[lista.size() / 2] << endl;
 		}
 	}
@@ -278,29 +285,29 @@ class ListaSalarios : public Lista {
 		if(lista.size() > 0) cout << "Maior salario: " << lista[0] << endl;
 		else cout << "Nenhum salario inserido" << endl;
 	}
-    /**
-	 * @brief O metodo abaixo exibe a lista em ordem crescente.
-	*/
-    void listarEmOrdem(){
-        for(size_t i=0; i<lista.size(); i++){
-            cout << lista[i] << endl;
-        }
-    }
-    /**
-	 * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem crescente.
-	*/
-    void listarLimite(size_t n){
-        if(lista.size()==0){
-            cout << "A lista de salarios esta vazia!" << endl;
-            return;
-        }
-        if(lista.size() < n)
-            n = lista.size();
-        
-        for(size_t i=0; i<n; i++){
-            cout << lista[i] << endl;
-        }
-    }
+  /**
+  * @brief O metodo abaixo exibe a lista em ordem crescente.
+  */
+  void listarEmOrdem(){
+      for(size_t i=0; i<lista.size(); i++){
+          cout << lista[i] << endl;
+      }
+  }
+  /**
+  * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem crescente.
+  */
+  void listarLimite(size_t n){
+      if(lista.size()==0){
+          cout << "A lista de salarios esta vazia!" << endl;
+          return;
+      }
+      if(lista.size() < n)
+          n = lista.size();
+
+      for(size_t i=0; i<n; i++){
+          cout << lista[i] << endl;
+      }
+  }
 };
 class ListaIdades : public Lista {
 	vector<int> lista;
@@ -315,14 +322,14 @@ class ListaIdades : public Lista {
 		cout << "> ";
 		cin >> qntIdades;
 		cin.ignore();
-		system("clear||cls");
+		system("clear");
 		for(int i = 0; i < qntIdades; i++){
 			int idade;
 			cout << i+1 << "º Idade: ";
 			cin >> idade;
 			lista.push_back(idade);
 		}
-		system("clear||cls");
+		system("clear");
 		sort(lista.begin(), lista.end());
 	}
 	/**
@@ -332,7 +339,7 @@ class ListaIdades : public Lista {
 		if(lista.size() > 0){
 			cout << "Mediana das idades: ";
 			if(lista.size() % 2 == 0){
-				cout << lista[(lista.size() / 2) - 1] << endl;
+				cout << (lista[(lista.size() / 2) - 1] + lista[(lista.size() / 2)]) / 2 << endl;
 			} else cout << lista[lista.size() / 2] << endl;
 		}
 	}
@@ -350,29 +357,29 @@ class ListaIdades : public Lista {
 		if(lista.size() > 0) cout << "Maior idade: " << lista[lista.size() - 1] << endl;
 		else cout << "Nenhuma idade inserida" << endl;
 	}
-    /**
-	 * @brief O metodo abaixo exibe a lista em ordem crescente.
-	*/
-    void listarEmOrdem(){
-        for(size_t i=0; i<lista.size(); i++){
-            cout << lista[i] << endl;
-        }
-    }
-    /**
-	 * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem crescente.
-	*/
-    void listarLimite(size_t n){
-        if(lista.size()==0){
-            cout << "A lista de idades esta vazia!" << endl;
-            return;
-        }
-        if(lista.size() < n)
-            n = lista.size();
-        
-        for(size_t i=0; i<n; i++){
-            cout << lista[i] << endl;
-        }
-    }
+  /**
+  * @brief O metodo abaixo exibe a lista em ordem crescente.
+  */
+  void listarEmOrdem(){
+      for(size_t i=0; i<lista.size(); i++){
+          cout << lista[i] << endl;
+      }
+  }
+  /**
+  * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem crescente.
+  */
+  void listarLimite(size_t n){
+      if(lista.size()==0){
+          cout << "A lista de idades esta vazia!" << endl;
+          return;
+      }
+      if(lista.size() < n)
+          n = lista.size();
+
+      for(size_t i=0; i<n; i++){
+          cout << lista[i] << endl;
+      }
+  }
 };
 int main () {
 	vector<Lista*> listaDeListas;
@@ -394,7 +401,8 @@ int main () {
 	listaDeListas.push_back(&listaIdades);
 	
 	for (Lista* l : listaDeListas) {
-		l->listarLimite(3);
-        cout << endl;
+		l->mostraMediana();
+		l->mostraMenor();
+		l->mostraMaior();
 	}
 }
