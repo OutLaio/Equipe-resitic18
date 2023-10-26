@@ -413,6 +413,9 @@ int main () {
 	listaDeListas.push_back(&listaIdades);
 	
 	for (Lista* l : listaDeListas) {
+		l->mostraMediana();
+		l->mostraMenor();
+		l->mostraMaior();
 		l->listarEmOrdem();
 	}
 }
