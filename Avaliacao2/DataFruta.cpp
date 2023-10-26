@@ -14,12 +14,6 @@ class Data {
 		ano = _ano;
 	}
 	Data(){}
-	Data (int _dia, int _mes, int _ano) {
-		dia = _dia;
-		mes = _mes;
-		ano = _ano;
-	}
-	Data(){}
 	/*
 	O metodo abaixo retornara -1 se d1 eh anterior a d2
 	Retornara 0 se d1 = d2
