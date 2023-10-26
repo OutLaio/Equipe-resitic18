@@ -69,7 +69,7 @@ class Lista {
 	virtual void mostraMenor() = 0;
 	virtual void mostraMaior() = 0;
     virtual void listarEmOrdem() = 0;
-    virtual void listarLimite(int) = 0;
+    virtual void listarLimite(size_t) = 0;
 };
 class ListaNomes : public Lista {
 	vector<string> lista;
@@ -132,7 +132,7 @@ class ListaNomes : public Lista {
     /**
 	 * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem alfabetica.
 	*/
-    void listarLimite(int n){
+    void listarLimite(size_t n){
         if(lista.size()==0){
             cout << "A lista de nomes esta vazia!" << endl;
             return;
@@ -215,7 +215,7 @@ class ListaDatas : public Lista {
     /**
 	 * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem cronológica.
 	*/
-    void listarLimite(int n){
+    void listarLimite(size_t n){
         if(lista.size()==0){
             cout << "A lista de datas esta vazia!" << endl;
             return;
@@ -289,9 +289,9 @@ class ListaSalarios : public Lista {
     /**
 	 * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem crescente.
 	*/
-    void listarLimite(int n){
+    void listarLimite(size_t n){
         if(lista.size()==0){
-            cout << "A lista de nomes esta vazia!" << endl;
+            cout << "A lista de salarios esta vazia!" << endl;
             return;
         }
         if(lista.size() < n)
@@ -361,9 +361,9 @@ class ListaIdades : public Lista {
     /**
 	 * @brief O metodo abaixo exibe os N primeiros itens da lista em ordem crescente.
 	*/
-    void listarLimite(int n){
+    void listarLimite(size_t n){
         if(lista.size()==0){
-            cout << "A lista de nomes esta vazia!" << endl;
+            cout << "A lista de idades esta vazia!" << endl;
             return;
         }
         if(lista.size() < n)
