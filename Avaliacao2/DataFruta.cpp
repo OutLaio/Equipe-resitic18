@@ -8,6 +8,12 @@ using namespace std;
 class Data {
 	int dia, mes, ano;
 	public:
+	Data (int _dia, int _mes, int _ano) {
+		dia = _dia;
+		mes = _mes;
+		ano = _ano;
+	}
+	Data(){}
 	/*
 	O metodo abaixo retornara -1 se d1 eh anterior a d2
 	Retornara 0 se d1 = d2
@@ -34,12 +40,13 @@ class Data {
 
 		return 0; // SE FOR IGUAIS
 	}
-	Data (int _dia, int _mes, int _ano) {
-		dia = _dia;
-		mes = _mes;
-		ano = _ano;
+	static void ordenaDatas(vector<Data> *lista){
+		for(size_t i=0; i<lista->size() - 1; i++){
+			if(Data::compara((*lista)[i], (*lista)[i+1]) == 1){
+				swap((*lista)[i], (*lista)[i+1]);
+			}
+		}
 	}
-	Data(){}
 	void setDia(int _dia){
 		this->dia = _dia;
 	}
@@ -119,6 +126,17 @@ class ListaNomes : public Lista {
 		if(lista.size() > 0) cout << "Último nome: " << lista[lista.size()-1] << endl;
 		else cout << "Nenhum nome inserido" << endl;
 	}
+	/**
+	 * @brief O metodo abaixo exibe a lista em ordem
+	*/
+	void listarEmOrdem(){
+		if(lista.size() > 0){
+			cout << "lista de Nomes:" << endl;
+			for(string s : lista){
+				cout << s << endl;
+			}
+		} else cout << "Nenhum nome inserido" << endl;
+	}
 };
 class ListaDatas : public Lista {
 	vector<Data> lista;
@@ -149,7 +167,7 @@ class ListaDatas : public Lista {
 			novaData.setAno(a);
 			lista.push_back(novaData);
 		}
-		sort(lista.begin(), lista.end(), Data::compara);
+		Data::ordenaDatas(&lista);
 		system("clear");
 	}
 	/**
@@ -169,15 +187,26 @@ class ListaDatas : public Lista {
 	 * @brief O metodo abaixo exibe a menor data da lista
 	*/
 	void mostraMenor() {
-		if(lista.size() > 0) cout << "Primeira data: " << lista[0].toString() << endl;
+		if(lista.size() > 0) cout << "Primeira data: " << lista[lista.size() - 1].toString() << endl;
 		else cout << "Nenhuma data inserida" << endl;
 	}
 	/**
 	 * @brief O metodo abaixo exibe a maior data da lista
 	*/
 	void mostraMaior() {
-		if(lista.size() > 0) cout << "Ultima data: " << lista[lista.size() - 1].toString() << endl;
+		if(lista.size() > 0) cout << "Ultima data: " << lista[0].toString() << endl;
 		else cout << "Nenhuma data inserida" << endl;
+	}
+	/**
+	 * @brief O metodo abaixo exibe a lista em ordem
+	*/
+	void listarEmOrdem(){
+		if(lista.size() > 0){
+			cout << "lista de Datas:" << endl;
+			for(Data dt : lista){
+				cout << dt.toString() << endl;
+			}
+		} else cout << "Nenhuma data inserida" << endl;
 	}
 };
 class ListaSalarios : public Lista {
@@ -230,6 +259,17 @@ class ListaSalarios : public Lista {
 		if(lista.size() > 0) cout << "Maior salario: " << lista[0] << endl;
 		else cout << "Nenhum salario inserido" << endl;
 	}
+	/**
+	 * @brief O metodo abaixo exibe a lista em ordem
+	*/
+	void listarEmOrdem(){
+		if(lista.size() > 0){
+			cout << "lista de Salarios:" << endl;
+			for(float f : lista){
+				cout << f << endl;
+			}
+		} else cout << "Nenhum salario inserido" << endl;
+	}
 };
 class ListaIdades : public Lista {
 	vector<int> lista;
@@ -278,6 +318,17 @@ class ListaIdades : public Lista {
 	void mostraMaior() {
 		if(lista.size() > 0) cout << "Maior idade: " << lista[lista.size() - 1] << endl;
 		else cout << "Nenhuma idade inserida" << endl;
+	}
+	/**
+	 * @brief O metodo abaixo exibe a lista em ordem
+	*/
+	void listarEmOrdem(){
+		if(lista.size() > 0){
+			cout << "lista de Idades:" << endl;
+			for(int i : lista){
+				cout << i << endl;
+			}
+		} else cout << "Nenhuma idade inserida" << endl;
 	}
 };
 int main () {
